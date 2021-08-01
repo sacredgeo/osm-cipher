@@ -23,8 +23,6 @@ canvas{
     display:block;
 }
 
-
-
 body{
     font-family:'Roboto',sans-serif; 
     height: 100%; 
@@ -172,8 +170,8 @@ input[type=text]:focus {
 .button1{ 
     display:inline-block; 
     padding:0.35em 1em; 
-    border:1px solid var(--bk); 
-    background-color: var(--bk);
+    border:1px solid rgb(99, 99, 99);
+    background-color: rgb(99, 99, 99);
     margin:0 0.3em 0.3em 0; 
     border-radius:4px; 
     box-sizing: border-box; 
@@ -187,9 +185,10 @@ input[type=text]:focus {
 } 
 
 .button1:hover{ 
-    border-color: var(--b7);
-    background-color: var(--b7); 
+    border-color: rgb(73, 73, 73);
+    background-color: rgb(73, 73, 73);
     cursor: pointer;
+    transition: .2s;
 }
 
 .button2{ 
@@ -251,10 +250,8 @@ td:hover:not(.tablecell) {
         width: 100%;
     }
     td {
-       
         height: 6vw;
-        width: 3vw;
-        
+        width: 3vw;  
     }
     .pageTitle{
         font-weight:600; 
@@ -278,10 +275,7 @@ td:hover:not(.tablecell) {
         font-weight:600; 
         font-size: 1.8em; 
     }
-    
   }
-
-
 
 .checkbox {
     display: inline-flex;
@@ -407,7 +401,6 @@ hr {
     background-color: var(--wh); 
     border-radius: 0px 0px 4px 4px ;
     font-size: small;
-    
 }
 /* drop down info (end)*/
 
