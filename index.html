@@ -67,8 +67,8 @@
                             <p><b class="descriptor">Key:</b> The key is case-sensitive and must be between 1 and 64 alphanumeric characters long. 
                                 Space (" ") and period (".") are also supported. You can generate a random key for the strongest encryption.<br><br>
                                 
-                                <b class="descriptor">Base64:</b> Enabling base64 allows all characters to be used and <i>can</i> create a stronger key. For example, an easily guessed key like "password" 
-                                becomes "cGFzc3dvcmQ" in base64. <i>There is currently a bug with this and it will be fixed soon.</i><br><br>
+                                <b class="descriptor">Base64:</b> Enabling base64 allows all characters to be used and <i>can</i> create a stronger key if 
+                                the original key is short. If the base64 includes "/" or "+", these characters will be replaced by space and period respectively.<br><br>
 
                                 <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chucks of the input and mixing them together. 
                                 Group size determines how many characters will be encrypted together at a time.
