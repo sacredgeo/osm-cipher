@@ -1,0 +1,406 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cipher</title>
+    <meta name="description" content="Cipher">
+    <meta name="author" content="">
+
+    <meta property="og:title" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:description" content="">
+
+    <link rel="icon" type="image/ico" href="favicon.ico">
+    
+    <link rel="stylesheet" href="style.css?v=1.0">
+
+    <style></style>
+
+</head>
+
+<body onload="pageLoad()" id="grad1">
+    <canvas id="c" style="z-index: -9999999999; position:fixed; margin-top: -100px; height: 110vh; width: 110vw; opacity: 10%;" ></canvas>
+
+ <div style="width: 75%; margin-left: auto;margin-right: auto;">
+    <br><br>
+    <p class="pageTitle">OSM CIPHER</p>
+ </div>
+
+ <div class="container">
+    <div class='row' >
+        <div class='column'>
+            <div class="columnTitle"><b>ENCRYPT / DECRYPT</b>
+            </div>
+            <div class='content-column'>
+
+                <form>
+                    <div class="boxArea">
+                        <label for="keyBox" class="boxTitle">KEY</label>
+                        <input type="text" id="keyBox" name="keyBox" style="margin-bottom: 1em;">
+
+                        <div class="button1" id="randomKey">RANDOM KEY</div><br><br>
+
+                        <label for="keyPeriod">Group size:</label> 
+                            <select name="keyPeriod" id="keyPeriod" style="margin-bottom: .5em;">
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7" selected>7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                            </select>
+
+                        <label class="checkbox" for="useBase64" style="float: right;">
+                            <input type="checkbox" id="useBase64" name="useBase64" value="no"/>
+                            <span>Convert key to base64</span>
+                        </label>
+
+                        <button type="button" class="collapsible" style="margin-top: .5em;">More information</button>
+                        <div class="content">
+                            <p><b class="descriptor">Key:</b> The key is case-sensitive and must be between 1 and 64 alphanumeric characters long. 
+                                Space (" ") and period (".") are also supported. You can generate a random key for the strongest encryption.<br><br>
+                                
+                                <b class="descriptor">Base64:</b> Enabling base64 allows all characters to be used and <i>can</i> create a stronger key. For example, an easily guessed key like "password" 
+                                becomes "cGFzc3dvcmQ" in base64.<br><br>
+
+                                <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chucks of the input and mixing them together. 
+                                Group size determines how many characters will be encrypted together at a time.
+                            </p>
+                        </div>
+                                    
+                    </div>
+
+                    <br> 
+
+                    <div class="boxArea">
+                        <label for="lname" class="boxTitle">INPUT</label>
+
+                        <textarea class="textbox" id="inputBox" name="" placeholder="Write something..." style="height: 200px; resize: vertical; overflow: auto;  font-family:'Roboto',sans-serif; "></textarea>
+                        
+                        <div style="float: right;">
+                            <p id="charCount" class="note" style="margin: 0px; text-align: right; padding-right: 1em; padding-bottom: 1em;"></p>
+                        </div>
+
+                        <div class="button1" id="sanitize">SANITIZE</div>
+
+                        <button type="button" class="collapsible" style="margin-top: 1em;">More information</button>
+                        <div class="content">
+                            <p>Acceptable characters for input are: A-Z, a-z, 0-9, space (" "), and period (".") <br><br>
+                                
+                                Sanitizing the text remove all other characters. Exclamation marks ("!") and 
+                                question marks ("?") will be converted to periods. Only sanitize the text when encrypting. 
+                            </p>
+                        </div>
+                    </div>
+                </form>
+
+                <br>
+
+                <div class="button2" id="encrypt">ENCRYPT</div>
+                <div class="button2" id="decrypt">DECRYPT</div>
+                <div class="button1" id="clearText" style="float: right;">CLEAR</div>
+
+                <br><br><hr><br>
+
+                <div class="boxArea">
+                    <label for="lname" class="boxTitle">OUTPUT</label>
+                    <textarea class="textbox" id="outputBox" name="" style="height: 200px; resize: vertical; overflow: auto; word-break: break-all; font-family:'Roboto',sans-serif; text-align: justify; "></textarea>
+                    <div class="button1" id="copyText">COPY</div>
+                </div>
+            </div>
+        </div>
+
+        <div class='column'>
+            <div class="columnTitle"><b>INFORMATION</b></div>
+            <div class='content-column'>
+                
+                <div class="boxArea">
+                    <p style="margin: 0em;" class="boxTitle">KEYED ALPHABET</p>
+
+                    <p id="keyedAlphabet" style="font-size: .8rem; background-color: #202020; padding: 6px; word-break: break-all; overflow-wrap: break-word; margin-top: 8px; 
+                    border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 4px; text-align: center;">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .</p>
+
+                    <button type="button" class="collapsible">More information</button>
+                    <div class="content">
+                        <p>The keyed alphabet takes your key, removes duplicates, and appends all remaining characters (A-Z, a-z, 0-9, space, and period) to the end. 
+                            A longer key creates a more unique alphabet. This 64-character alphabet is used to fill the cipher table below. 
+                        </p>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="boxArea">
+
+                    <p style="margin-top: 0em;" class="boxTitle">CIPHER TABLE</p>
+                    <table style="width:100%;" id="cipherTableMatrix">
+                        <tr class="tablecell">
+                            <td colspan="3" rowspan="3"></td>
+                            
+                            <td colspan="4">1</td>
+                            <td colspan="4">2</td>
+                        </tr>
+                        <tr class="tablecell">
+                            <td colspan="2">1</td>
+                            <td colspan="2">2</td>
+                            <td colspan="2">1</td>
+                            <td colspan="2">2</td>
+                        </tr>
+                        <tr class="tablecell"> 
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="4" class="tablecell">1</td>
+                            <td rowspan="2" class="tablecell">1</td>
+                            <td class="tablecell">1</td>
+
+                            <td id="t0">18</td>
+                            <td id="t1">11</td>
+                            <td id="t2">12</td>
+                            <td id="t3">13</td>
+                            <td id="t4">14</td>
+                            <td id="t5">15</td>
+                            <td id="t6">16</td>
+                            <td id="t7">17</td>                   
+                        </tr>
+                        <tr>
+                            <td class="tablecell">2</td>
+
+                            <td id="t8">18</td>
+                            <td id="t9">21</td>
+                            <td id="t10">22</td>
+                            <td id="t11">23</td>
+                            <td id="t12">24</td>
+                            <td id="t13">25</td>
+                            <td id="t14">26</td>
+                            <td id="t15">27</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="tablecell">2</td>
+                            <td class="tablecell">1</td>
+
+                            <td id="t16">28</td>
+                            <td id="t17">31</td>
+                            <td id="t18">32</td>
+                            <td id="t19">33</td>
+                            <td id="t20">34</td>
+                            <td id="t21">35</td>
+                            <td id="t22">36</td>
+                            <td id="t23">37</td>
+                        </tr>
+                        <tr>
+                            <td class="tablecell">2</td>
+
+                            <td id="t24">38</td>
+                            <td id="t25">41</td>
+                            <td id="t26">42</td>
+                            <td id="t27">43</td>
+                            <td id="t28">44</td>
+                            <td id="t29">45</td>
+                            <td id="t30">46</td>
+                            <td id="t31">47</td>                   
+                        </tr>
+                        <tr>
+                            <td rowspan="4" class="tablecell">2</td>
+                            <td rowspan="2" class="tablecell">1</td>
+                            <td class="tablecell">1</td>
+
+                            <td id="t32">48</td>
+                            <td id="t33">51</td>
+                            <td id="t34">52</td>
+                            <td id="t35">53</td>
+                            <td id="t36">54</td>
+                            <td id="t37">55</td>
+                            <td id="t38">56</td>
+                            <td id="t39">57</td>                  
+                        </tr>
+                        <tr>
+                            <td class="tablecell">2</td>
+
+                            <td id="t40">58</td>
+                            <td id="t41">61</td>
+                            <td id="t42">62</td>
+                            <td id="t43">63</td>
+                            <td id="t44">64</td>
+                            <td id="t45">65</td>
+                            <td id="t46">66</td>
+                            <td id="t47">67</td>                  
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="tablecell">2</td>
+                            <td class="tablecell">1</td>
+
+                            <td id="t48">68</td>
+                            <td id="t49">71</td>
+                            <td id="t50">72</td>
+                            <td id="t51">73</td>
+                            <td id="t52">74</td>
+                            <td id="t53">75</td>
+                            <td id="t54">76</td>
+                            <td id="t55">77</td>                  
+                        </tr>
+                        <tr>
+                            <td class="tablecell">2</td>
+
+                            <td id="t56">78</td>
+                            <td id="t57">81</td>
+                            <td id="t58">82</td>
+                            <td id="t59">83</td>
+                            <td id="t60">84</td>
+                            <td id="t61">85</td>
+                            <td id="t62">86</td>
+                            <td id="t63">87</td>                   
+                        </tr>
+                    </table>
+                    
+                    <br>
+
+                    <p id="tableLocation" class="note" style="margin: 0px;  padding-bottom: 1em; "></p>
+                    
+                    <button type="button" class="collapsible">More information</button>
+                        <div class="content">
+                            <p>The cipher table arranges the keyed alphabet onto a modified polybius square which is used to encrypt or decrypt the message. 
+                                Characters are identified by their location on three pairs of rows and columns. The location data is mixed together and new characters are derived.
+                                This method combines transposition and fractionation to achieve diffusion.   
+                            </p>
+                        </div>
+
+                </div>
+                
+                <!-- unused 8x8 table-->
+                <table style="width:100%; display: none;">
+                    <tr>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                        <td>24</td>
+                        <td>25</td>
+                        <td>26</td>
+                        <td>27</td>
+                        <td>28</td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>32</td>
+                        <td>33</td>
+                        <td>34</td>
+                        <td>35</td>
+                        <td>36</td>
+                        <td>37</td>
+                        <td>38</td>
+                    </tr>
+                    <tr>
+                        <td>41</td>
+                        <td>42</td>
+                        <td>43</td>
+                        <td>44</td>
+                        <td>45</td>
+                        <td>46</td>
+                        <td>47</td>
+                        <td>48</td>
+                    </tr>
+                    <tr>
+                        <td>51</td>
+                        <td>52</td>
+                        <td>53</td>
+                        <td>54</td>
+                        <td>55</td>
+                        <td>56</td>
+                        <td>57</td>
+                        <td>58</td>
+                    </tr>
+                    <tr>
+                        <td>61</td>
+                        <td>62</td>
+                        <td>63</td>
+                        <td>64</td>
+                        <td>65</td>
+                        <td>66</td>
+                        <td>67</td>
+                        <td>68</td>
+                    </tr>
+                    <tr>
+                        <td>71</td>
+                        <td>72</td>
+                        <td>73</td>
+                        <td>74</td>
+                        <td>75</td>
+                        <td>76</td>
+                        <td>77</td>
+                        <td>78</td>
+                    </tr>
+                    <tr>
+                        <td>81</td>
+                        <td>82</td>
+                        <td>83</td>
+                        <td>84</td>
+                        <td>85</td>
+                        <td>86</td>
+                        <td>87</td>
+                        <td>88</td>
+                    </tr>
+                </table>
+            </div>
+
+            <span style="display: none;">
+            <div class="columnTitle" style="margin-top: 16px;"><b>LEARN</b></div>
+                <div class='content-column'>
+                    <div class="boxArea">
+                        <p>This section will show how to do it by hand.</p>
+                    </div>
+                </div>
+            </span>
+
+        </div>
+    </div>
+</div>
+
+
+<p style="text-align: center; color: white; font-size: small; margin-top: 5em; margin-bottom: 5em;">Created by: /u/SACRED-GEOMETRY</p>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                content.style.maxHeight = null;
+                } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                } 
+            });
+        }
+    </script>
+
+    <script src="main.js"></script>
+    <script src="matrix.js"></script>
+</body>
+
+</html>
