@@ -234,6 +234,7 @@ td {
 
 td:hover:not(.tablecell) {
     box-shadow: inset 0px 2px 0px var(--b6);
+    cursor: pointer;
 }
 
 .tablecell{

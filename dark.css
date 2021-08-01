@@ -232,6 +232,7 @@ table{
 
 td:hover:not(.tablecell) {
     color: var(--yw);
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 950px) {
