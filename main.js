@@ -356,6 +356,7 @@ function shuffle(k) {
 //live character counter
 document.getElementById("inputBox").onkeyup = function(){
     document.getElementById("charCount").textContent = 'Character count: ' + this.value.length;
+    document.getElementById("charCount").style.display = "inherit";
 }
 
 //sanitize input
