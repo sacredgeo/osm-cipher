@@ -92,9 +92,10 @@
 
                         <button type="button" class="collapsible" style="margin-top: 1em;">More information</button>
                         <div class="content">
-                            <p>Acceptable characters for input are: A-Z, a-z, 0-9, space (" "), and period (".") <br><br>
+                            <p><b class="descriptor">Input:</b> Acceptable characters for input are: A-Z, a-z, 0-9, space (" "), and period (".") 
+                                If you include other characters you must sanitize the input or the encryption process will fail.<br><br>
                                 
-                                Sanitizing the text remove all other characters. Exclamation marks ("!") and 
+                                <b class="descriptor">Sanitize</b> Sanitizing the text remove all other characters. Exclamation marks ("!") and 
                                 question marks ("?") will be converted to periods. Only sanitize the text when encrypting. 
                             </p>
                         </div>
@@ -144,29 +145,29 @@
                         <tr class="tablecell">
                             <td colspan="3" rowspan="3"></td>
                             
+                            <td colspan="4">0</td>
                             <td colspan="4">1</td>
-                            <td colspan="4">2</td>
                         </tr>
                         <tr class="tablecell">
+                            <td colspan="2">0</td>
                             <td colspan="2">1</td>
-                            <td colspan="2">2</td>
+                            <td colspan="2">0</td>
                             <td colspan="2">1</td>
-                            <td colspan="2">2</td>
                         </tr>
                         <tr class="tablecell"> 
+                            <td>0</td>
                             <td>1</td>
-                            <td>2</td>
+                            <td>0</td>
                             <td>1</td>
-                            <td>2</td>
+                            <td>0</td>
                             <td>1</td>
-                            <td>2</td>
+                            <td>0</td>
                             <td>1</td>
-                            <td>2</td>
                         </tr>
                         <tr>
-                            <td rowspan="4" class="tablecell">1</td>
-                            <td rowspan="2" class="tablecell">1</td>
-                            <td class="tablecell">1</td>
+                            <td rowspan="4" class="tablecell">0</td>
+                            <td rowspan="2" class="tablecell">0</td>
+                            <td class="tablecell">0</td>
 
                             <td id="t0">18</td>
                             <td id="t1">11</td>
@@ -178,7 +179,7 @@
                             <td id="t7">17</td>                   
                         </tr>
                         <tr>
-                            <td class="tablecell">2</td>
+                            <td class="tablecell">1</td>
 
                             <td id="t8">18</td>
                             <td id="t9">21</td>
@@ -190,8 +191,8 @@
                             <td id="t15">27</td>
                         </tr>
                         <tr>
-                            <td rowspan="2" class="tablecell">2</td>
-                            <td class="tablecell">1</td>
+                            <td rowspan="2" class="tablecell">1</td>
+                            <td class="tablecell">0</td>
 
                             <td id="t16">28</td>
                             <td id="t17">31</td>
@@ -203,7 +204,7 @@
                             <td id="t23">37</td>
                         </tr>
                         <tr>
-                            <td class="tablecell">2</td>
+                            <td class="tablecell">1</td>
 
                             <td id="t24">38</td>
                             <td id="t25">41</td>
@@ -215,9 +216,9 @@
                             <td id="t31">47</td>                   
                         </tr>
                         <tr>
-                            <td rowspan="4" class="tablecell">2</td>
-                            <td rowspan="2" class="tablecell">1</td>
-                            <td class="tablecell">1</td>
+                            <td rowspan="4" class="tablecell">1</td>
+                            <td rowspan="2" class="tablecell">0</td>
+                            <td class="tablecell">0</td>
 
                             <td id="t32">48</td>
                             <td id="t33">51</td>
@@ -229,7 +230,7 @@
                             <td id="t39">57</td>                  
                         </tr>
                         <tr>
-                            <td class="tablecell">2</td>
+                            <td class="tablecell">1</td>
 
                             <td id="t40">58</td>
                             <td id="t41">61</td>
@@ -241,8 +242,8 @@
                             <td id="t47">67</td>                  
                         </tr>
                         <tr>
-                            <td rowspan="2" class="tablecell">2</td>
-                            <td class="tablecell">1</td>
+                            <td rowspan="2" class="tablecell">1</td>
+                            <td class="tablecell">0</td>
 
                             <td id="t48">68</td>
                             <td id="t49">71</td>
@@ -254,7 +255,7 @@
                             <td id="t55">77</td>                  
                         </tr>
                         <tr>
-                            <td class="tablecell">2</td>
+                            <td class="tablecell">1</td>
 
                             <td id="t56">78</td>
                             <td id="t57">81</td>
