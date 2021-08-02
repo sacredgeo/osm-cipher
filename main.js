@@ -140,8 +140,8 @@ document.getElementById("encrypt").onclick = function() {
         //if using multiple group sizes
     } else if (document.getElementById('groupSizeM').checked){
         cipherPeriod = document.getElementById("multiGroupSize").value.split(",");
-        console.log('Specific groups: ' + cipherPeriod);
-        console.log('Groups in cycle: ' + cipherPeriod.length);
+        //console.log('Specific groups: ' + cipherPeriod);
+        //console.log('Groups in cycle: ' + cipherPeriod.length);
     }
 
     //the number of periods specified by the user (ex: [3,4,3,6] = 4 total)
@@ -159,26 +159,26 @@ document.getElementById("encrypt").onclick = function() {
          stringGroupCalc = stringGroupCalc.substring(6 * cipherPeriod[(totalGroups % periodCycleAmount)]);
          totalGroups++;
     }
-    console.log('Total groups: ' + totalGroups);
+    //console.log('Total groups: ' + totalGroups);
     
     //create array that will hold each group
     let stringGroupsArray = [];
 
-    //????????
+    //break up the string into groups according to single group size
     if (document.getElementById('groupSizeS').checked){
         for (i = 0; i < (stringPreTrans.length / (cipherPeriod * 6)); i++){
             stringGroupsArray[i] = stringPreTrans.substr((i * cipherPeriod * 6), (cipherPeriod * 6));
         }
     } else if (document.getElementById('groupSizeM').checked){
-        //break up the string into groups according to group size
+        //break up the string into groups according to multiple group sizes
         let startPos = 0;
         for (i = 0; i < totalGroups; i++){
             stringGroupsArray[i] = stringPreTrans.substr(startPos, (cipherPeriod[i % cipherPeriod.length] * 6));
             startPos += (cipherPeriod[i % cipherPeriod.length] * 6);
         }
     }
-    console.log(stringPreTrans);
-    console.log(stringGroupsArray);
+    //console.log(stringPreTrans);
+    //console.log(stringGroupsArray);
 
     //create an array that will hold the scrambled groups
     let transArray = [];
@@ -202,7 +202,7 @@ document.getElementById("encrypt").onclick = function() {
             }
         }
     }
-    console.log('Transposed: ' + transArray)
+    //console.log('Transposed: ' + transArray)
 
     //need code to scramble last group if single character???????????????????
 
@@ -278,8 +278,8 @@ document.getElementById("decrypt").onclick = function() {
         //if using multiple group sizes
     } else if (document.getElementById('groupSizeM').checked){
         cipherPeriod = document.getElementById("multiGroupSize").value.split(",");
-        console.log('Specific groups: ' + cipherPeriod);
-        console.log('Groups in cycle: ' + cipherPeriod.length);
+        //console.log('Specific groups: ' + cipherPeriod);
+        //console.log('Groups in cycle: ' + cipherPeriod.length);
     }
 
     //the number of periods specified by the user (ex: [3,4,3,6] = 4 total)
@@ -297,7 +297,7 @@ document.getElementById("decrypt").onclick = function() {
          stringGroupCalc = stringGroupCalc.substring(6 * cipherPeriod[(totalGroups % periodCycleAmount)]);
          totalGroups++;
     }
-    console.log('Total groups: ' + totalGroups);
+    //console.log('Total groups: ' + totalGroups);
     
     //create array that will hold each group
     let stringGroupsArray = [];
@@ -315,8 +315,8 @@ document.getElementById("decrypt").onclick = function() {
             startPos += (cipherPeriod[i % cipherPeriod.length] * 6);
         }
     }
-    console.log(stringPreTrans);
-    console.log(stringGroupsArray);
+    //console.log(stringPreTrans);
+    //console.log(stringGroupsArray);
 
     //create an array that will hold the scrambled groups
     let transArray = [];
