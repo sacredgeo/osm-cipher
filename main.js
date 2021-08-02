@@ -30,7 +30,7 @@ function getKey(k) {
          //convert ket input to base64
         let keyInputB64 = btoa(keyInput);
         //remove all equal signs from base64 key
-        keyInput = keyInputB64.replace(/=/g, '');
+        keyInput = keyInputB64.replace(/=/g, '').replace(/\//g, ' ').replace(/\+/g, '.');
     }
 
     //split the key input to an array and filter duplicates
