@@ -156,7 +156,7 @@ input[type=text]:focus {
 
 .keyedAlphabetBox {
     font-size: .8rem; 
-    background-color: #fff; 
+    background-color: #dcf8fda6; 
     color: var(--bk);
     padding: 6px; 
     word-break: break-all; 
@@ -233,8 +233,9 @@ td {
 }
 
 td:hover:not(.tablecell) {
-    box-shadow: inset 0px 2px 0px var(--b6);
     cursor: pointer;
+    background-color: #0095c721;
+    color: var(--b8);
 }
 
 .tablecell{
