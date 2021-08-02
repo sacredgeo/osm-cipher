@@ -40,31 +40,95 @@
                 <form>
                     <div class="boxArea">
                         <label for="keyBox" class="boxTitle">KEY</label>
-                        <input type="text" id="keyBox" name="keyBox" style="margin-bottom: 1em;">
+                        <input type="text" id="keyBox" class="keyBox" style="margin-bottom: 1em;">
 
-                        <div class="button1" id="randomKey">RANDOM KEY</div><br><br>
-
-                        <label for="keyPeriod">Group size:</label> 
-                            <select name="keyPeriod" id="keyPeriod" style="margin-bottom: .5em;">
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7" selected>7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                            </select>
-
+                        <div class="button1" id="randomKey">RANDOM KEY</div>
                         <label class="checkbox" for="useBase64" style="float: right;">
                             <input type="checkbox" id="useBase64" name="useBase64" value="no"/>
                             <span>Convert key to base64</span>
                         </label>
+                        
+                        <br>
+
+                        <!--start of settings-->
+                    <div class="container" style="width: 100%;">
+                        <div class='row'>
+                            <div class='column' style="padding-left: 0px; padding-right: 0px;"> 
+            
+                                <p class="formLabel">Group size:</p>
+                                <input type="radio" id="groupSizeS" name="sGroupSize" value="S" onClick="ckChange(this)" checked>
+                                <label for="group1">Single</label><br>
+                                <input type="radio" id="groupSizeM" name="sGroupSize" value="M" onClick="ckChange(this)">
+                                <label for="group2">Multiple</label>
+
+                            </div>
+                    
+                            <div class='column' style="padding-left: 0px; padding-right: 0px;">
+                    
+                                <div id="sSingle" >
+                                    <p class="formLabel">Single group size:</p>
+                                    <select id="singleGroupSize" class="sSelect">
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7" selected>7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                    </select>
+                                </div>   
+
+                                <div id="sMulti" style="display: none;">
+                                    <p class="formLabel">Enter group sizes:</p>
+                                    <input type="text" id="multiGroupSize" class="sTextbox">
+                                    <p class="formLabelSmall">Separated by comma (ex: 8,13,9,6...)</p>
+                                </div> 
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function ckChange(ckType){
+                            if (ckType.value === 'S') {
+                                document.getElementById('sSingle').style.display = "inherit";
+                                document.getElementById('sMulti').style.display = "none";
+                            }  else if (ckType.value === 'M') {
+                                document.getElementById('sSingle').style.display = "none";
+                                document.getElementById('sMulti').style.display = "inherit";
+                            }
+                        }  
+                    </script>
+                    <!--end of settings-->
+                    
+
+
+                    <span style="display: none">
+                    <label for="keyPeriod">Group size:</label> 
+                        <select name="keyPeriod" id="keyPeriod" style="margin-bottom: .5em;" class="oselect">
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7" selected>7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                        </select>
+                    </span>
+
+                        
 
                         <button type="button" class="collapsible" style="margin-top: .5em;">More information</button>
                         <div class="content">
@@ -74,7 +138,7 @@
                                 <b class="descriptor">Base64:</b> Enabling base64 allows all characters to be used and <i>can</i> create a stronger key if 
                                 the original key is short. If the base64 includes "/" or "+", these characters will be replaced by space and period respectively.<br><br>
 
-                                <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chucks of the input and mixing them together. 
+                                <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chunks of the input and mixing them together. 
                                 Group size determines how many characters will be encrypted together at a time.
                             </p>
                         </div>
@@ -112,7 +176,7 @@
                 <div class="button2" id="decrypt">DECRYPT</div>
                 <div class="button1" id="clearText" style="float: right;">CLEAR</div>
 
-                <br><br><hr><br>
+                <br><br>
 
                 <div class="boxArea">
                     <label for="lname" class="boxTitle">OUTPUT</label>

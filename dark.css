@@ -126,7 +126,9 @@ select:hover {
     padding: 1em; 
 }
 
-input[type=text] {
+
+
+.keyBox {
     width: 100%;
     padding: 8px 12px;
     margin: 8px 0;
@@ -137,10 +139,10 @@ input[type=text] {
     color: var(--wh);
 }
 
-input[type=text]:focus {
-     border: 2px solid var(--yw);
-     background-color: var(--dg); 
-     outline: none;
+.keyBox:focus {
+    border: 2px solid var(--yw);
+    background-color: var(--dg); 
+    outline: none;
 }
 
 .textbox {
@@ -439,4 +441,65 @@ td:hover:not(.tablecell) {
     border-right: 1px solid var(--yw); 
     border-bottom: 1px solid var(--yw); 
     color: var(--wh); 
+}
+
+/* settings form */
+.formLabel{
+    font-weight: bold;
+    margin-bottom: 0.4em;
+    margin-top: 0em;
+}
+.formLabelSmall{
+    font-size: 0.75em;
+    margin-top: 0.25em;
+    margin-bottom: 0em;
+    padding-left: 0.5em;
+    padding-bottom: 0em;
+    color: rgba(255,255,255, .7);
+}
+
+.singleGroupSize{
+    background: var(--wh);
+    border: 1px solid var(--bk);
+    border-radius: 4px;
+    color: var(--bk);
+    padding: 1px;
+    outline: none;
+    margin-left: .3em;
+    width: 100%;
+}
+.singleGroupSize select:hover {
+    border: 1px solid var(--yw);
+}
+
+.sTextbox{
+    width: 100%;
+    padding: 9px 12px;
+    margin: 0em;
+    box-sizing: border-box;
+    border: 1px solid var(--wh);
+    border-radius: 4px;
+    color: var(--bk);
+    background-color: var(--dg); 
+    font-size: small;
+}
+.sTextbox:focus {
+     border: 1px solid var(--yw);
+     outline: none;
+}
+
+.sSelect{
+    background: var(--wh);
+    border: 1px solid var(--wh);
+    border-radius: 4px;
+    color: var(--wh);
+    background-color: var(--dg);
+    padding: 8px 12px;
+    margin: 0em;
+    outline: none;
+    width: 100%;
+    font-size: small;
+}
+.sSelect:hover{
+    border: 1px solid var(--yw);
 }

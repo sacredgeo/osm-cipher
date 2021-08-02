@@ -112,7 +112,7 @@ function getInputYX(inputText, finalKey, stringPreTrans){
 //encrypt function
 document.getElementById("encrypt").onclick = function() {
 
-    console.log("Encrypt function started...");
+    //console.log("Encrypt function started...");
 
     //create variable k which is sent to the getKey function and returns the key
     let k;
@@ -132,15 +132,53 @@ document.getElementById("encrypt").onclick = function() {
     stringPreTrans = getInputYX(inputText, finalKey, stringPreTrans);
    
     //get the group size from user-selected menu
-    let cipherPeriod = document.getElementById("keyPeriod").value;
+    //the period, either a single number or an array or numbers [a,b,c,d...]
+    let cipherPeriod; 
+    //if using a single group size
+    if (document.getElementById('groupSizeS').checked){
+        cipherPeriod = document.getElementById("singleGroupSize").value;
+        //if using multiple group sizes
+    } else if (document.getElementById('groupSizeM').checked){
+        cipherPeriod = document.getElementById("multiGroupSize").value.split(",");
+        console.log('Specific groups: ' + cipherPeriod);
+        console.log('Groups in cycle: ' + cipherPeriod.length);
+    }
 
+    //the number of periods specified by the user (ex: [3,4,3,6] = 4 total)
+    //we will cycle through these to divide the string
+    let periodCycleAmount = cipherPeriod.length;
+
+    //make a copy of the string we subtract the periods from
+    let stringGroupCalc = stringPreTrans;
+
+    //determine the total number of groups required to divide string
+    let totalGroups = 0;
+    while (stringGroupCalc.length > 0){
+    
+         //remove length of period
+         stringGroupCalc = stringGroupCalc.substring(6 * cipherPeriod[(totalGroups % periodCycleAmount)]);
+         totalGroups++;
+    }
+    console.log('Total groups: ' + totalGroups);
+    
     //create array that will hold each group
     let stringGroupsArray = [];
 
-    //break up the string into groups according to group size
-    for (i = 0; i < (stringPreTrans.length / (cipherPeriod * 6)); i++){
-        stringGroupsArray[i] = stringPreTrans.substr((i * cipherPeriod * 6), (cipherPeriod * 6));
+    //????????
+    if (document.getElementById('groupSizeS').checked){
+        for (i = 0; i < (stringPreTrans.length / (cipherPeriod * 6)); i++){
+            stringGroupsArray[i] = stringPreTrans.substr((i * cipherPeriod * 6), (cipherPeriod * 6));
+        }
+    } else if (document.getElementById('groupSizeM').checked){
+        //break up the string into groups according to group size
+        let startPos = 0;
+        for (i = 0; i < totalGroups; i++){
+            stringGroupsArray[i] = stringPreTrans.substr(startPos, (cipherPeriod[i % cipherPeriod.length] * 6));
+            startPos += (cipherPeriod[i % cipherPeriod.length] * 6);
+        }
     }
+    console.log(stringPreTrans);
+    console.log(stringGroupsArray);
 
     //create an array that will hold the scrambled groups
     let transArray = [];
@@ -164,6 +202,7 @@ document.getElementById("encrypt").onclick = function() {
             }
         }
     }
+    console.log('Transposed: ' + transArray)
 
     //need code to scramble last group if single character???????????????????
 
@@ -196,8 +235,7 @@ document.getElementById("encrypt").onclick = function() {
         charGroup = charGroupY.concat(charGroupX);
 
         //find the location of the string in the cipher table array (it has already stored these values)
-        //then find the character at that location in the key
-        //then add it to the final encryption string
+        //then find the character at that location in the key and add it to the final encryption string
         finalEncryption += finalKey.charAt(cipherTableArray.indexOf(charGroup));
     }
 
@@ -212,7 +250,7 @@ document.getElementById("encrypt").onclick = function() {
 //decrypt function
 document.getElementById("decrypt").onclick = function() {
     //this will be very similar to the encrypt function, but the transposition will differ
-    console.log("Decrypt function started...");
+    //console.log("Decrypt function started...");
 
     //create variable k which is sent to the getKey function and returns the key
     let k;
@@ -232,21 +270,56 @@ document.getElementById("decrypt").onclick = function() {
     stringPreTrans = getInputYX(inputText, finalKey, stringPreTrans);
     
     //get the group size from user-selected menu
-    let cipherPeriod = document.getElementById("keyPeriod").value;
+    //the period, either a single number or an array or numbers [a,b,c,d...]
+    let cipherPeriod; 
+    //if using a single group size
+    if (document.getElementById('groupSizeS').checked){
+        cipherPeriod = document.getElementById("singleGroupSize").value;
+        //if using multiple group sizes
+    } else if (document.getElementById('groupSizeM').checked){
+        cipherPeriod = document.getElementById("multiGroupSize").value.split(",");
+        console.log('Specific groups: ' + cipherPeriod);
+        console.log('Groups in cycle: ' + cipherPeriod.length);
+    }
 
+    //the number of periods specified by the user (ex: [3,4,3,6] = 4 total)
+    //we will cycle through these to divide the string
+    let periodCycleAmount = cipherPeriod.length;
+
+    //make a copy of the string we subtract the periods from
+    let stringGroupCalc = stringPreTrans;
+
+    //determine the total number of groups required to divide string
+    let totalGroups = 0;
+    while (stringGroupCalc.length > 0){
+    
+         //remove length of period
+         stringGroupCalc = stringGroupCalc.substring(6 * cipherPeriod[(totalGroups % periodCycleAmount)]);
+         totalGroups++;
+    }
+    console.log('Total groups: ' + totalGroups);
+    
     //create array that will hold each group
     let stringGroupsArray = [];
 
-    //break up the string into groups according to group size
-    for (i = 0; i < (stringPreTrans.length / (cipherPeriod * 6)); i++){
-        stringGroupsArray[i] = stringPreTrans.substr((i * cipherPeriod * 6), (cipherPeriod * 6));
+    //????????
+    if (document.getElementById('groupSizeS').checked){
+        for (i = 0; i < (stringPreTrans.length / (cipherPeriod * 6)); i++){
+            stringGroupsArray[i] = stringPreTrans.substr((i * cipherPeriod * 6), (cipherPeriod * 6));
+        }
+    } else if (document.getElementById('groupSizeM').checked){
+        //break up the string into groups according to group size
+        let startPos = 0;
+        for (i = 0; i < totalGroups; i++){
+            stringGroupsArray[i] = stringPreTrans.substr(startPos, (cipherPeriod[i % cipherPeriod.length] * 6));
+            startPos += (cipherPeriod[i % cipherPeriod.length] * 6);
+        }
     }
-    //console.log(stringGroupsArray);
+    console.log(stringPreTrans);
+    console.log(stringGroupsArray);
 
     //create an array that will hold the scrambled groups
     let transArray = [];
-
-    console.log(cipherPeriod);
 
     //loop through each group in the string array (this is the entire transposition)
     for (i = 0; i < stringGroupsArray.length; i++){
@@ -267,8 +340,7 @@ document.getElementById("decrypt").onclick = function() {
             }
         }
     }
-    console.log(transArray);
-
+    
     //need code to scramble last group if single character???????????????????
 
     //combine the transposed groups back into one string
@@ -300,8 +372,7 @@ document.getElementById("decrypt").onclick = function() {
         charGroup = charGroupY.concat(charGroupX);
 
         //find the location of the string in the cipher table array (it has already stored these values)
-        //then find the character at that location in the key
-        //then add it to the final encryption string
+        //then find the character at that location in the key and add it to the final encryption string
         finalDecryption += finalKey.charAt(cipherTableArray.indexOf(charGroup));
     }
 
@@ -364,12 +435,12 @@ document.getElementById("sanitize").onclick = function() {
     var punctRE = /[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-\/:;<=>@\[\]^_`{|}~]/g;
     var spaceRE = /\s+/g;
     var str = document.getElementById("inputBox").value;
+    //replace !? with period, convert whitepace to spaces, remove all other punctuation
     document.getElementById("inputBox").value = str.replace(/[?!]/g, '.').replace(punctRE, '').replace(spaceRE, ' ');
 }
 
 //user clicks cipher table to find letter location
 document.getElementById("cipherTableMatrix").onclick = e => {
-    //console.log(e.target);  // to get the element
 
     //if the target has been named with an id
     if(e.target.id){
@@ -400,9 +471,5 @@ document.getElementById("cipherTableMatrix").onclick = e => {
 
         document.getElementById("tableLocation").textContent = 'Location of "' +  clickedChar + '" = ' + mergedCharPositions;
         document.getElementById("tableLocation").style.display = "inherit";
-
-       
-        //console.log('Location of "' + clickedChar + '" = ' +mergedCharPositions);
     }
-    
 } 
