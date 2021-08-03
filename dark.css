@@ -236,6 +236,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   margin-top: -0.6em;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 td:hover:not(.tablecell) {
@@ -282,6 +283,7 @@ td:hover:not(.tablecell) {
 .tablecell {
   background-color: var(--dg);
   color: var(--wh);
+  font-family: 'Roboto', sans-serif;
 }
 
 .checkbox {
