@@ -112,7 +112,8 @@
                                 replaced by space and period respectively.<br><br>
                                 <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chunks
                                 of the input and mixing them together.
-                                Group size determines how many characters will be encrypted together at a time.<br>
+                                Group size determines how many characters will be encrypted together at a time. If multiple 
+                                group sizes are entered the encryption will cycle through them. A group size of "1" will not provide encryption.<br>
                             </p>
                         </div>
                         <hr>
@@ -302,7 +303,7 @@
                             <p>This section will show how to do it by hand.</p>
                         </div>
                     </span>
-                    <a href="dark.html">
+                    <a href="dark.html" style="display: none;">
                         <div class="themeButton">
                             USE DARK THEME
                         </div>
@@ -323,7 +324,6 @@
                         content.style.maxHeight = null;
                     } else {
                         content.style.maxHeight = content.scrollHeight + "px";
-            
                     }
                     if (content.style.border) {
                         content.style.border = null;
