@@ -1,0 +1,108 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A Basic HTML5 Template</title>
+  <meta name="description" content="A simple HTML5 Template for new projects.">
+  <meta name="author" content="SitePoint">
+
+  
+
+</head>
+
+<p>
+  <!-- your content here... -->
+    <p>Input</p>
+    <textarea id="input" style="height: 100px; width: 300px;"></textarea><br>
+    <p>Output</p>
+    <textarea id="output" style="height: 100px; width: 300px; word-break: break-all;"></textarea><br>
+
+    <p>Rotors  ||  Position</p>
+    <select name="ra" id="ra" style="margin-right: 1em;">
+      <option value="0" selected>1</option>
+      <option value="1">2</option>
+      <option value="2">3</option>
+      <option value="3">4</option>
+      <option value="4">5</option>
+      <option value="5">6</option>
+      <option value="6">7</option>
+      <option value="7">8</option>
+      <option value="8">9</option>
+      <option value="9">10</option>
+      <option value="10">11</option>
+      <option value="11">12</option>
+      <option value="12">13</option>
+    </select>
+    <input type="number" id="raStart" style="width: 40px;" maxlength="3" min="1" max="189" value="1"><br>
+    <select name="r1" id="r1" style="margin-right: 1em;">
+      <option value="0">1</option>
+      <option value="1" selected>2</option>
+      <option value="2">3</option>
+      <option value="3">4</option>
+      <option value="4">5</option>
+      <option value="5">6</option>
+      <option value="6">7</option>
+      <option value="7">8</option>
+      <option value="8">9</option>
+      <option value="9">10</option>
+      <option value="10">11</option>
+      <option value="11">12</option>
+      <option value="12">13</option>
+    </select>
+    <input type="number" id="r1Start" style="width: 40px;" maxlength="3" min="1" max="189" value="1"><br>
+    <select name="r2" id="r2" style="margin-right: 1em;">
+      <option value="0">1</option>
+      <option value="1">2</option>
+      <option value="2" selected>3</option>
+      <option value="3">4</option>
+      <option value="4">5</option>
+      <option value="5">6</option>
+      <option value="6">7</option>
+      <option value="7">8</option>
+      <option value="8">9</option>
+      <option value="9">10</option>
+      <option value="10">11</option>
+      <option value="11">12</option>
+      <option value="12">13</option>
+    </select>
+    <input type="number" id="r2Start" style="width: 40px;" maxlength="3" min="1" max="189" value="1"><br>
+    <select name="r3" id="r3" style="margin-right: 1em;">
+      <option value="0">1</option>
+      <option value="1">2</option>
+      <option value="2">3</option>
+      <option value="3" selected>4</option>
+      <option value="4">5</option>
+      <option value="5">6</option>
+      <option value="6">7</option>
+      <option value="7">8</option>
+      <option value="8">9</option>
+      <option value="9">10</option>
+      <option value="10">11</option>
+      <option value="11">12</option>
+      <option value="12">13</option>
+    </select>
+    <input type="number" id="r3Start" style="width: 40px;" maxlength="3" min="1" max="189" value="1"><br> 
+    
+    
+    
+    
+    
+
+    <br>
+    <button type="button" id="encryptButton">Encrypt</button>
+    <button type="button" id="decryptButton">Decrypt</button>
+    <button type="button" id="xorButton">XOR Encrypt</button>
+    <button type="button" id="xorButton2">XOR Decrypt</button>
+    <br><br>
+
+    <p>Key</p>
+    <input type="text" id="keyBox" style="width: 300px;">
+    <p>Stream Output</p>
+    <textarea id="outputXor" style="height: 100px; width: 300px; word-break: break-all;"></textarea><br>
+
+  <script src="main.js"></script>
+</body>
+</html>
