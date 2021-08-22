@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ION Cipher</title>
+    <meta name="description" content="ION Cipher">
+    <meta name="sg" content="">
+    <!-- <link rel="icon" type="image/ico" href="favicon.ico"> -->
+    <link rel="stylesheet" href="style.css?v=1.0">
+    <style></style>
+</head>
+
+<body>
+  
+    <div style="width: 75%; margin-left: auto;margin-right: auto;">
+        <br><br>
+        <a href="index.html" style="text-decoration: none;">
+            <p class="pageTitle">ION CIPHER</p>
+        </a>
+    </div>
+
+    <div class="columnTitle"><b>ENCRYPT / DECRYPT</b>
+    </div>
+    <div class='content-column'>
+        <div style="background-color: #ddd; border-radius: 4px; border: 1px solid #999; padding: 1em;">
+        <label for="keyBox" class="boxTitle">SETTINGS</label>
+
+        <br>
+
+        <br>
+        <!--start of settings-->
+        <div class="container" style="width: 100%;">
+
+            <p class="formLabel">Method</p>
+            <input type="radio" id="methodStandard" name="method" value="S" onClick="ckChange(this)" checked>
+            <label for="group1">Standard</label><br>
+            <input type="radio" id="methodStream" name="method" value="M" onClick="ckChange(this)">
+            <label for="group2">Stream</label>
+
+            <div class='row'>
+
+                <div class='column' style="padding-left: 0px; padding-right: 0px">
+
+                    <p style="margin-bottom: 0.3em;"><b>Rotors / Position</b></p>
+                    <span style="color: var(--b5);">A</span>
+                    <select name="ra" id="ra" class="sSelect" style="margin-right: 1em;">
+                        <option value="0" selected>1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                        <option value="12">13</option>
+                        <option value="13">14</option>
+                        <option value="14">15</option>
+                        <option value="15">16</option>
+                        <option value="16">17</option>
+                        <option value="17">18</option>
+                        <option value="18">19</option>
+                        <option value="19">20</option>
+                    </select>
+                    <input type="number" id="raStart" class="sSelect" maxlength="3" min="1" max="189" value="1"><br>
+                    <span style="color: var(--b5);">1</span>
+                    <select name="r1" id="r1" class="sSelect" style="margin-right: 1em;">
+                        <option value="0">1</option>
+                        <option value="1" selected>2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                        <option value="12">13</option>
+                        <option value="13">14</option>
+                        <option value="14">15</option>
+                        <option value="15">16</option>
+                        <option value="16">17</option>
+                        <option value="17">18</option>
+                        <option value="18">19</option>
+                        <option value="19">20</option>
+                    </select>
+                    <input type="number" id="r1Start" class="sSelect" maxlength="3" min="1" max="189" value="1"><br>
+                    <span style="color: var(--b5);">2</span>
+                    <select name="r2" id="r2" class="sSelect" style="margin-right: 1em;">
+                        <option value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2" selected>3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                        <option value="12">13</option>
+                        <option value="13">14</option>
+                        <option value="14">15</option>
+                        <option value="15">16</option>
+                        <option value="16">17</option>
+                        <option value="17">18</option>
+                        <option value="18">19</option>
+                        <option value="19">20</option>
+                    </select>
+                    <input type="number" id="r2Start" class="sSelect" maxlength="3" min="1" max="189" value="1"><br>
+                    <span style="color: var(--b5);">3</span>
+                    <select name="r3" id="r3" class="sSelect" style="margin-right: 1em;">
+                        <option value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3" selected>4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                        <option value="12">13</option>
+                        <option value="13">14</option>
+                        <option value="14">15</option>
+                        <option value="15">16</option>
+                        <option value="16">17</option>
+                        <option value="17">18</option>
+                        <option value="18">19</option>
+                        <option value="19">20</option>
+                    </select>
+                    <input type="number" id="r3Start" class="sSelect" maxlength="3" min="1" max="189" value="1"><br>
+                    <p class="formLabelSmall" style=" margin-left: 81%;">1-189</p>
+
+                </div>
+                <div class='column' style="padding-left: 0px; padding-right: 0px;">
+
+                    <p style="margin-bottom: 0.3em;"><b>Rotors / Position</b></p>
+                    <span style="color: var(--b5);">μ1</span>
+                    <select name="m1" id="m1" class="sSelect" style="margin-right: 1em;">
+                        <option value="0" selected>1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                    </select>
+                    <input type="number" id="m1Start" class="sSelect" maxlength="3" min="1" max="91" value="1"><br>
+                    <p class="formLabelSmall" style=" margin-left: 85%;">1-91</p>
+
+                    <span style="color: var(--b5);">μ2</span>
+                    <select name="m2" id="m2" class="sSelect" style="margin-right: 1em;">
+                        <option value="0" selected>1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                    </select>
+                    <input type="number" id="m2Start" class="sSelect" maxlength="3" min="1" max="73" value="1"><br>
+                    <p class="formLabelSmall" style=" margin-left: 85%;">1-73</p>
+
+                </div>
+            </div>
+        </div>
+        <script>
+            function ckChange(ckType) {
+                if (ckType.value === 'S') {
+                    document.getElementById('keydiv').style.display = "none";
+                   
+                } else if (ckType.value === 'M') {
+                    document.getElementById('keydiv').style.display = "inherit";
+                    
+                }
+            }
+        </script>
+        <!--end of settings-->
+        <div id="keydiv" style="display: none; background-color: rgba(173, 40, 49, 0.15); border-radius: 4px; border: 1px solid #777; padding: 1em">
+            <label for="keyBox" class="boxTitle">KEY</label>
+            <input type="text" id="keyBox" class="keyBox" >
+
+            <div class='row'>
+
+                <div class='column' style="padding-left: 0px; padding-right: 0px">
+
+                    <p style="margin-bottom: 0.3em;"><b>Rotors / Position</b></p>
+                    <span style="color: var(--b5);">A</span>
+                    <select name="ra" id="xra" class="sSelect" style="margin-right: 1em;">
+                        <option value="0" selected>1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                        <option value="12">13</option>
+                        <option value="13">14</option>
+                        <option value="14">15</option>
+                        <option value="15">16</option>
+                        <option value="16">17</option>
+                        <option value="17">18</option>
+                        <option value="18">19</option>
+                        <option value="19">20</option>
+                    </select>
+                    <input type="number" id="xraStart" class="sSelect" maxlength="3" min="1" max="189" value="1"><br>
+                    <span style="color: var(--b5);">1</span>
+                    <select name="r1" id="xr1" class="sSelect" style="margin-right: 1em;">
+                        <option value="0">1</option>
+                        <option value="1" selected>2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                        <option value="12">13</option>
+                        <option value="13">14</option>
+                        <option value="14">15</option>
+                        <option value="15">16</option>
+                        <option value="16">17</option>
+                        <option value="17">18</option>
+                        <option value="18">19</option>
+                        <option value="19">20</option>
+                    </select>
+                    <input type="number" id="xr1Start" class="sSelect" maxlength="3" min="1" max="189" value="1"><br>
+                    <span style="color: var(--b5);">2</span>
+                    <select name="r2" id="xr2" class="sSelect" style="margin-right: 1em;">
+                        <option value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2" selected>3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                        <option value="12">13</option>
+                        <option value="13">14</option>
+                        <option value="14">15</option>
+                        <option value="15">16</option>
+                        <option value="16">17</option>
+                        <option value="17">18</option>
+                        <option value="18">19</option>
+                        <option value="19">20</option>
+                    </select>
+                    <input type="number" id="xr2Start" class="sSelect" maxlength="3" min="1" max="189" value="1"><br>
+                    <span style="color: var(--b5);">3</span>
+                    <select name="r3" id="xr3" class="sSelect" style="margin-right: 1em;">
+                        <option value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3" selected>4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                        <option value="6">7</option>
+                        <option value="7">8</option>
+                        <option value="8">9</option>
+                        <option value="9">10</option>
+                        <option value="10">11</option>
+                        <option value="11">12</option>
+                        <option value="12">13</option>
+                        <option value="13">14</option>
+                        <option value="14">15</option>
+                        <option value="15">16</option>
+                        <option value="16">17</option>
+                        <option value="17">18</option>
+                        <option value="18">19</option>
+                        <option value="19">20</option>
+                    </select>
+                    <input type="number" id="xr3Start" class="sSelect" maxlength="3" min="1" max="189" value="1"><br>
+                    <p class="formLabelSmall" style=" margin-left: 81%;">1-189</p>
+
+                </div>
+                <div class='column' style="padding-left: 0px; padding-right: 0px;">
+
+                    <p style="margin-bottom: 0.3em;"><b>Rotors / Position</b></p>
+                    <span style="color: var(--b5);">μ1</span>
+                    <select name="m1" id="xm1" class="sSelect" style="margin-right: 1em;">
+                        <option value="0" selected>1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                    </select>
+                    <input type="number" id="xm1Start" class="sSelect" maxlength="3" min="1" max="91" value="1"><br>
+                    <p class="formLabelSmall" style=" margin-left: 85%;">1-91</p>
+
+                    <span style="color: var(--b5);">μ2</span>
+                    <select name="m2" id="xm2" class="sSelect" style="margin-right: 1em;">
+                        <option value="0" selected>1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                        <option value="3">4</option>
+                        <option value="4">5</option>
+                        <option value="5">6</option>
+                    </select>
+                    <input type="number" id="xm2Start" class="sSelect" maxlength="3" min="1" max="73" value="1"><br>
+                    <p class="formLabelSmall" style=" margin-left: 85%;">1-73</p>
+
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+
+        <hr>
+        <label for="lname" class="boxTitle">INPUT</label>
+        <textarea class="textbox" id="input" placeholder="Enter text to encrypt OR ciphertext to decrypt..."
+            style="height: 150px; resize: vertical; overflow: auto; font-family:'Roboto',sans-serif; "></textarea>
+        <div style="float: right;">
+            <p id="charCount" class="note"
+                style="margin: 0px; text-align: right; padding-right: 1em; padding-bottom: 1em;">Test</p>
+        </div>
+       
+        <br>
+        <label for="lname" class="boxTitle">OUTPUT</label>
+        <textarea class="textbox" id="output"
+            style="height: 150px; resize: vertical; overflow: auto; word-break: break-all; font-family:'Roboto',sans-serif; text-align: justify; "></textarea>
+
+            <div class="button2" id="encryptButton">ENCRYPT</div>
+            <div class="button2" id="decryptButton">DECRYPT</div>
+            <div class="button1" id="copyText" style="float: right;">COPY</div>
+            <div class="button1" id="clearText" style="float: right;">CLEAR</div>
+
+            
+    </div>
+    
+
+    <br><br><br><br><br><br><br>
+    <script src="main.js"></script>
+
+</body>
+
+</html>
+
