@@ -21,10 +21,8 @@
         </a>
     </div>
 
-    <div class="columnTitle"><b>ENCRYPT / DECRYPT</b>
-    </div>
     <div class='content-column'>
-        <div style="background-color: #ddd; border-radius: 4px; border: 1px solid #999; padding: 1em;">
+        <div style="background-color: #2a2d30; border-radius: 4px; border: 1px solid #000; padding: 1em;">
         <label for="keyBox" class="boxTitle">SETTINGS</label>
 
         <br>
@@ -35,15 +33,15 @@
 
             <p class="formLabel">Method</p>
             <input type="radio" id="methodStandard" name="method" value="S" onClick="ckChange(this)" checked>
-            <label for="group1">Standard</label><br>
+            <label for="group1" style="color: var(--wh)">Standard</label><br>
             <input type="radio" id="methodStream" name="method" value="M" onClick="ckChange(this)">
-            <label for="group2">Stream</label>
+            <label for="group2" style="color: var(--wh)">Stream</label>
 
             <div class='row'>
 
                 <div class='column' style="padding-left: 0px; padding-right: 0px">
 
-                    <p style="margin-bottom: 0.3em;"><b>Rotors / Position</b></p>
+                    <p style="margin-bottom: 0.3em; color: var(--wh);"><b>Rotors / Position</b></p>
                     <span style="color: var(--b5);">A</span>
                     <select name="ra" id="ra" class="sSelect" style="margin-right: 1em;">
                         <option value="0" selected>1</option>
@@ -145,7 +143,7 @@
                 </div>
                 <div class='column' style="padding-left: 0px; padding-right: 0px;">
 
-                    <p style="margin-bottom: 0.3em;"><b>Rotors / Position</b></p>
+                    <p style="margin-bottom: 0.3em; color: var(--wh)"><b>Rotors / Position</b></p>
                     <span style="color: var(--b5);">μ1</span>
                     <select name="m1" id="m1" class="sSelect" style="margin-right: 1em;">
                         <option value="0" selected>1</option>
@@ -185,7 +183,7 @@
             }
         </script>
         <!--end of settings-->
-        <div id="keydiv" style="display: none; background-color: rgba(173, 40, 49, 0.15); border-radius: 4px; border: 1px solid #777; padding: 1em">
+        <div id="keydiv" class="settingsBox">
             <label for="keyBox" class="boxTitle">KEY</label>
             <input type="text" id="keyBox" class="keyBox" >
 
@@ -193,7 +191,7 @@
 
                 <div class='column' style="padding-left: 0px; padding-right: 0px">
 
-                    <p style="margin-bottom: 0.3em;"><b>Rotors / Position</b></p>
+                    <p style="margin-bottom: 0.3em;  color: var(--wh)"><b>Rotors / Position</b></p>
                     <span style="color: var(--b5);">A</span>
                     <select name="ra" id="xra" class="sSelect" style="margin-right: 1em;">
                         <option value="0" selected>1</option>
@@ -295,7 +293,7 @@
                 </div>
                 <div class='column' style="padding-left: 0px; padding-right: 0px;">
 
-                    <p style="margin-bottom: 0.3em;"><b>Rotors / Position</b></p>
+                    <p style="margin-bottom: 0.3em; color: var(--wh)"><b>Rotors / Position</b></p>
                     <span style="color: var(--b5);">μ1</span>
                     <select name="m1" id="xm1" class="sSelect" style="margin-right: 1em;">
                         <option value="0" selected>1</option>
@@ -343,9 +341,8 @@
 
             <div class="button2" id="encryptButton">ENCRYPT</div>
             <div class="button2" id="decryptButton">DECRYPT</div>
-            <div class="button1" id="copyText" style="float: right;">COPY</div>
             <div class="button1" id="clearText" style="float: right;">CLEAR</div>
-
+            <div class="button1" id="copyText" style="float: right;">COPY</div>
             
     </div>
     

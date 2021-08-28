@@ -455,6 +455,17 @@ document.getElementById('clearText').onclick = function () {
 }
 
 
+
+document.getElementById('copyText').onclick = function () {
+  var copyTextv = document.getElementById('output')
+  var textArea = document.createElement('textarea')
+  textArea.value = copyTextv.value
+  document.body.appendChild(textArea)
+  textArea.select()
+  document.execCommand('Copy')
+  textArea.remove()
+}
+
      /*
       //separate alphabets with dash
       if ((i+1) % alphabet.length === 0){

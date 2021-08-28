@@ -5,33 +5,33 @@
   --b2: #ade8f4;
   --b3: #90e0ef;
   --b4: #48cae4;
-  --b5: #AD2831;
-  --b6: #800E13;
+  --b5: #E52127;
+  --b6: #E52127;
   --b7: #640D14;
-  --b8: #38040E;
+  --b8: #4e0514;
   --b9: #03045e;
+  --bg: #303539;
+  --bg2: #242627;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   height: 100%;
   margin: 0;
-  background-repeat: repeat;
-  background-attachment: fixed;
-  background-color: #fafafa;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='344' height='344' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23800e1370' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23ad283170'%3E%3Ccircle cx='769' cy='229' r='6'/%3E%3Ccircle cx='539' cy='269' r='6'/%3E%3Ccircle cx='603' cy='493' r='6'/%3E%3Ccircle cx='731' cy='737' r='6'/%3E%3Ccircle cx='520' cy='660' r='6'/%3E%3Ccircle cx='309' cy='538' r='6'/%3E%3Ccircle cx='295' cy='764' r='6'/%3E%3Ccircle cx='40' cy='599' r='6'/%3E%3Ccircle cx='102' cy='382' r='6'/%3E%3Ccircle cx='127' cy='80' r='6'/%3E%3Ccircle cx='370' cy='105' r='6'/%3E%3Ccircle cx='578' cy='42' r='6'/%3E%3Ccircle cx='237' cy='261' r='6'/%3E%3Ccircle cx='390' cy='382' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  background-color: #242627;
+  background-image: url("data:image/svg+xml,%3Csvg width='44' height='12' viewBox='0 0 44 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 12v-2L0 0v10l4 2h16zm18 0l4-2V0L22 10v2h16zM20 0v8L4 0h16zm18 0L22 8V0h16z' fill='%23191b1c' fill-opacity='0.51' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
 ::-webkit-scrollbar {
   width: 14px; /* width of the entire scrollbar */
 }
 ::-webkit-scrollbar-track {
-  background: var(--wh); /* color of the tracking area */
+  background: var(--bg2); /* color of the tracking area */
 }
 ::-webkit-scrollbar-thumb {
   background-color: var(--b6); /* color of the scroll thumb */
   border-radius: 20px; /* roundness of the scroll thumb */
-  border: 3px solid var(--wh); /* creates padding around scroll thumb */
+  border: 3px solid var(--bg2); /* creates padding around scroll thumb */
 }
 
 /*custom code for select drop down*/
@@ -60,7 +60,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   letter-spacing: 0.3em;
   margin-left: auto;
   margin-right: auto;
-  width: 65%;
+  width: 70%;
   max-width: 1100px;
   padding: 10px;
   user-select: none;
@@ -98,7 +98,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 .content-column {
-  background-color: #f0f0f079;
+  background-color: #303539;
+  background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23727272' fill-opacity='0.11' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
   border: 2px var(--b6) solid;
   border-radius: 0px 0px 0px 0px;
   color: var(--bl);
@@ -119,13 +120,12 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   box-sizing: border-box;
   border: 2px solid var(--bk);
   border-radius: 4px;
-  background-color: var(--wh);
-  color: var(--bk);
+  background-color: var(--bg2);
+  color: var(--wh);
 }
 
 .keyBox:focus {
   border: 2px solid var(--b6);
-  background-color: var(--wh);
   outline: none;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 4px #800e143a;
 }
@@ -139,13 +139,13 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
   box-sizing: border-box;
   border: 2px solid var(--bk);
   border-radius: 4px;
-  color: var(--bk);
-  background-color: var(--wh);
+  color: var(--wh);
+  background-color: var(--bg2);
 }
 
 .textbox:focus {
   border: 2px solid var(--b6);
-  background-color: var(--wh);
+  background-color: var(--bg2);
   outline: none;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 4px #800e143a;
 }
@@ -204,8 +204,8 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 .button2:hover {
-  color: var(--wh);
-  background-color: var(--b7);
+  color: var(--bl);
+  background-color: var(--wh);
   border: 1px solid var(--b7);
   cursor: pointer;
 }
@@ -275,7 +275,7 @@ td:hover:not(.tablecell) {
   }
   .pageTitle {
     font-weight: 600;
-    font-size: 2.4em;
+    font-size: 2em;
   }
   
 }
@@ -369,7 +369,7 @@ span.hover {
 }
 
 .boxTitle {
-  color: var(--b7);
+  color: var(--b6);
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -459,6 +459,7 @@ hr {
   font-weight: bold;
   margin-bottom: 0.4em;
   margin-top: 0em;
+  color: var(--wh);
 }
 .formLabelSmall {
   font-size: 0.7em;
@@ -466,7 +467,7 @@ hr {
   margin-bottom: 0em;
   padding-left: 0.5em;
   padding-bottom: 0em;
-  color: rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .singleGroupSize {
@@ -503,10 +504,10 @@ hr {
 }
 
 .sSelect {
-  background: var(--wh);
+  background: var(--bg2);
   border: 1px solid var(--bk);
   border-radius: 4px;
-  color: var(--bk);
+  color: var(--wh);
   padding: 4px 12px;
   outline: none;
   width: 42%;
@@ -519,4 +520,15 @@ hr {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 0 4px #800e143a;
 }
 
-
+.settingsBox{
+  background: rgb(30,34,36);
+  background: -moz-linear-gradient(180deg, rgba(30,34,36,1) 0%, rgba(16,18,20,1) 100%);
+  background: -webkit-linear-gradient(180deg, rgba(30,34,36,1) 0%, rgba(16,18,20,1) 100%);
+  background: linear-gradient(180deg, rgba(30,34,36,1) 0%, rgba(16,18,20,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e2224",endColorstr="#101214",GradientType=1);
+  display: none; 
+  background-color: rgba(0, 0, 0, 0.4); 
+  border-radius: 4px; 
+  border: 1px solid #000; 
+  padding: 1em; 
+}
