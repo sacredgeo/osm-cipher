@@ -23,13 +23,20 @@
                     <div class="columnTitle"><b>ENCRYPT / DECRYPT</b>
                     </div>
                     <div class='content-column'>
-                        <label for="keyBox" class="boxTitle">KEY</label>
+                        <label for="keyBox" class="boxTitle">KEY / SETTINGS</label>
                         <input type="text" id="keyBox" class="keyBox" style="margin-bottom: 1em;">
-                        <div class="button1" id="randomKey">RANDOM KEY</div>
+                        <div class="button1" id="randomKey">RANDOM</div>
                         <label class="checkbox" for="useBase64" style="float: right; margin-top: 0.25em;">
-                        <input type="checkbox" id="useBase64" name="useBase64" value="no" />
-                        <span>Convert key to base64</span>
+                            <input type="checkbox" id="useBase64" name="useBase64" value="no" />
+                            <span>Use base64</span> 
                         </label>
+
+                        <label class="checkbox" for="filler" style="float: right; margin-top: 0.25em; padding-right: 1em;">
+                            <input type="checkbox" id="filler" name="filler" value="no" />
+                            <span>Filler</span> 
+                        </label>
+
+                      
                         <br>
                         <!--start of settings-->
                         <div class="container" style="width: 100%;">
@@ -100,20 +107,25 @@
                                 <option value="15">15</option>
                             </select>
                         </span>
-                        <button type="button" class="collapsible" style="margin-top: .5em;">Key information</button>
+                        <button type="button" class="collapsible" style="margin-top: .5em;">Settings information</button>
                         <div class="content">
                             <p><b class="descriptor">Key:</b> The key is case-sensitive and must be between 1 and 64
                                 alphanumeric characters long.
-                                Space (" ") and period (".") are also supported. You can generate a random key for the
-                                strongest encryption.<br><br>
-                                <b class="descriptor">Base64:</b> Enabling base64 allows all characters to be used and
-                                <i>can</i> create a stronger key if
-                                the original key is short. If the base64 includes "/" or "+", these characters will be
-                                replaced by space and period respectively.<br><br>
+                                Underscore ("_") and period (".") are also supported. 
+                                You can generate a random key for the strongest encryption.<br><br>
                                 <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chunks
                                 of the input and mixing them together.
                                 Group size determines how many characters will be encrypted together at a time. If multiple 
-                                group sizes are entered the encryption will cycle through them. A group size of "1" will not provide encryption.<br>
+                                group sizes are entered the encryption will cycle through them. A group size of "1" will not provide encryption. 
+                                Extra characters may be padded at the end of the text to meet the selected group size.<br><br>
+                                <b class="descriptor">Filler:</b> 
+                                Random characters are added to the plaintext before encryption to make cryptography more difficult. 
+                                One random character is added per group. These characters are removed during decryption.
+                                <br><br>
+                                <b class="descriptor">Base64:</b> Enabling base64 allows all characters to be used and
+                                <i>can</i> create a stronger key if
+                                the original key is short. If the base64 includes "+" or "/", these characters will be
+                                replaced by underscore and period respectively.<br>
                             </p>
                         </div>
                         <hr>
@@ -129,7 +141,7 @@
                         <button type="button" class="collapsible" style="margin-top: 1em;">Input information</button>
                         <div class="content">
                             <p><b class="descriptor">Input:</b> Acceptable characters for input are: A-Z, a-z, 0-9, space ("
-                                "), and period (".")
+                                "), and period ("."). Spaces are treated as underscores when encrypting. 
                                 If you include other characters you must sanitize the input or the encryption process will
                                 fail.<br><br>
                                 <b class="descriptor">Sanitize:</b> Sanitizing the text remove all other characters,
@@ -158,7 +170,7 @@
                         <button type="button" class="collapsible">Keyed alphabet information</button>
                         <div class="content">
                             <p>The <b class="descriptor">keyed alphabet</b> takes your key, removes duplicates, and appends
-                                all remaining characters (A-Z, a-z, 0-9, space, and period) to the end.
+                                all remaining characters (A-Z, a-z, 0-9, underscore, and period) to the end.
                                 A longer key creates a more unique alphabet. This 64-character alphabet is used to fill the
                                 cipher table below.
                             </p>
@@ -303,11 +315,23 @@
                             <p>This section will show how to do it by hand.</p>
                         </div>
                     </span>
+                    
+                        <div class="versionButton">
+                            VERSION 1.2
+                        </div>
+                    
+                    <a href="/v1/index.html" >
+                        <div class="versionButton2">
+                            VERSION 1
+                        </div>
+                    </a>
+
                     <a href="dark.html" style="display: none;">
                         <div class="themeButton">
                             USE DARK THEME
                         </div>
                     </a>
+
                 </div>
             </div>
         </div>

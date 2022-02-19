@@ -153,7 +153,7 @@ body {
   word-break: break-all;
   overflow-wrap: break-word;
   margin-top: 8px;
-  border: 1px solid var(--bk);
+  border: 1px solid #999;
   border-radius: 4px;
   text-align: center;
 }
@@ -163,7 +163,7 @@ body {
   padding: 0.35em 1em;
   border: 1px solid rgb(99, 99, 99);
   background-color: rgb(99, 99, 99);
-  margin: 0 0.3em 0.3em 0;
+  margin: 0 0 0 0.3em;
   border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
@@ -184,9 +184,9 @@ body {
 
 .button2 {
   display: inline-block;
-  padding: 0.35em 1em;
+  padding: 0.35em .5em;
   border: 1px solid var(--b6);
-  margin: 0 0.3em 0.3em 0;
+  margin: 0.0em !important;
   border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
@@ -237,6 +237,15 @@ td:hover:not(.tablecell) {
   font-family: 'Roboto', sans-serif;
 }
 
+@media only screen and (max-width: 1000px) {
+  .button1{
+    font-size: 0.9em;
+  }
+  .button2{
+    font-size: 0.9em;
+  }
+}
+
 @media only screen and (max-width: 950px) {
   table {
     font-size: small;
@@ -254,6 +263,12 @@ td:hover:not(.tablecell) {
   .pageTitle {
     font-weight: 600;
     font-size: 2.4em;
+  }
+  .button1{
+    font-size: 1em;
+  }
+  .button2{
+    font-size: 1em;
   }
 }
 
@@ -419,6 +434,49 @@ hr {
 
 .themeButton:hover {
   background-color: var(--b7);
+}
+
+.versionButton {
+  color: white;
+  background-color: var(--b6);
+  border-radius: 0px 0px 4px 4px;
+  margin-top: 0em;
+  margin-right: 0.5em;
+  margin-bottom: 2em;
+  float: left;
+  text-align: center;
+  padding: 0.3em 0.8em;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+}
+
+.versionButton2 {
+  color: var(--b6);
+  border: 1px solid var(--b6);
+  border-width: 0px 1px 1px 1px;
+  background-color: white;
+  border-radius: 0px 0px 4px 4px;
+  margin-top: 0em;
+  margin-bottom: 2em;
+  float: left;
+  text-align: center;
+  padding: 0.3em 0.8em;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+}
+
+.versionButton2:hover {
+  color: white;
+  border: 1px solid var(--b6);
+  border-width: 0px 1px 1px 1px;
+  background-color: #0095c7ab;
+  border-radius: 0px 0px 4px 4px;
+  margin-top: 0em;
+  float: left;
+  text-align: center;
+  padding: 0.3em 0.8em;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
 }
 
 /* settings form */
