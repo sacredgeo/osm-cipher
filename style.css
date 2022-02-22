@@ -111,6 +111,7 @@ body {
   width: 100%;
   padding: 8px 12px;
   margin: 8px 0;
+  margin-bottom: 0em;
   box-sizing: border-box;
   border: 2px solid var(--bk);
   border-radius: 4px;
@@ -163,7 +164,7 @@ body {
   padding: 0.35em 1em;
   border: 1px solid rgb(99, 99, 99);
   background-color: rgb(99, 99, 99);
-  margin: 0 0 0 0.3em;
+  margin: 0 0 0 0.3em !important;
   border-radius: 4px;
   box-sizing: border-box;
   text-decoration: none;
@@ -176,15 +177,16 @@ body {
 }
 
 .button1:hover {
-  border-color: rgb(73, 73, 73);
-  background-color: rgb(73, 73, 73);
+  border-color: rgb(61, 61, 61);
+  background-color: rgb(61, 61, 61);
   cursor: pointer;
-  transition: 0.2s;
+  transition: .25s;
+  box-shadow: inset 0px -2px 0px rgb(228, 228, 228);
 }
 
 .button2 {
   display: inline-block;
-  padding: 0.35em .5em;
+  padding: 0.35em .75em;
   border: 1px solid var(--b6);
   margin: 0.0em !important;
   border-radius: 4px;
@@ -203,6 +205,8 @@ body {
   background-color: var(--b7);
   border: 1px solid var(--b7);
   cursor: pointer;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2),  inset 0px -3px 0px white;
+  transition: .25s;
 }
 
 table {
@@ -228,6 +232,9 @@ td:hover:not(.tablecell) {
   cursor: pointer;
   background-color: #0095c721;
   color: var(--b8);
+  
+  background-image: linear-gradient(#aeebff, #f1fcff);
+  
 }
 
 .tablecell {
@@ -466,10 +473,9 @@ hr {
 }
 
 .versionButton2:hover {
-  color: white;
+  
   border: 1px solid var(--b6);
   border-width: 0px 1px 1px 1px;
-  background-color: #0095c7ab;
   border-radius: 0px 0px 4px 4px;
   margin-top: 0em;
   float: left;
@@ -477,6 +483,7 @@ hr {
   padding: 0.3em 0.8em;
   font-size: 0.8em;
   letter-spacing: 0.05em;
+  box-shadow: inset 0px -2px 0px var(--b6);
 }
 
 /* settings form */

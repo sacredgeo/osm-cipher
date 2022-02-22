@@ -24,11 +24,12 @@
                     </div>
                     <div class='content-column'>
                         <label for="keyBox" class="boxTitle">KEY / SETTINGS</label>
-                        <input type="text" id="keyBox" class="keyBox" style="margin-bottom: 1em;">
+                        <input type="text" id="keyBox" class="keyBox" style="margin-bottom: 1em;" placeholder="Key...">
                         <div class="button1" id="randomKey">RANDOM</div>
-                        <label class="checkbox" for="useBase64" style="float: right; margin-top: 0.25em;">
+                        <div class="button1" id="genKey">HASH</div>
+                        <label class="checkbox" for="useBase64" style="float: right; margin-top: 0.25em; display: none;">
                             <input type="checkbox" id="useBase64" name="useBase64" value="no" />
-                            <span>Use base64</span> 
+                            <span>Base64</span> 
                         </label>
 
                         <label class="checkbox" for="filler" style="float: right; margin-top: 0.25em; padding-right: 1em;">
@@ -113,19 +114,19 @@
                                 alphanumeric characters long.
                                 Underscore ("_") and period (".") are also supported. 
                                 You can generate a random key for the strongest encryption.<br><br>
-                                <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chunks
-                                of the input and mixing them together.
-                                Group size determines how many characters will be encrypted together at a time. If multiple 
-                                group sizes are entered the encryption will cycle through them. A group size of "1" will not provide encryption. 
-                                Extra characters may be padded at the end of the text to meet the selected group size.<br><br>
+                                <b class="descriptor">Hash:</b> Generates a unique 64-character string from a keyword.
+                                This new key appears random and provides more security than a short and simple keyword.<br><br>
                                 <b class="descriptor">Filler:</b> 
                                 Random characters are added to the plaintext before encryption to make cryptography more difficult. 
                                 One random character is added per group. These characters are removed during decryption.
                                 <br><br>
-                                <b class="descriptor">Base64:</b> Enabling base64 allows all characters to be used and
-                                <i>can</i> create a stronger key if
-                                the original key is short. If the base64 includes "+" or "/", these characters will be
-                                replaced by underscore and period respectively.<br>
+                                <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chunks
+                                of the input and mixing them together.
+                                Group size determines how many characters will be encrypted together at a time. If multiple 
+                                group sizes are entered the encryption will cycle through them. A group size of "1" will not provide encryption. 
+                                Extra characters may be padded at the end of the text to meet the selected group size.<br>
+                                
+                                
                             </p>
                         </div>
                         <hr>
@@ -135,7 +136,7 @@
                             style="height: 150px; resize: vertical; overflow: auto; font-family:'Roboto',sans-serif; "></textarea>
                         <div style="float: right;">
                             <p id="charCount" class="note"
-                                style="margin: 0px; text-align: right; padding-right: 1em; padding-bottom: 1em;">Test</p>
+                                style="margin: 0px; text-align: right; padding-right: 1em; padding-bottom: 1em; font-size: 0.9em; font-family:'Roboto',sans-serif;">Test</p>
                         </div>
                         <div class="button1" id="sanitize">SANITIZE</div>
                         <button type="button" class="collapsible" style="margin-top: 1em;">Input information</button>
@@ -306,6 +307,16 @@
                                 and new output characters are derived. This method combines transposition and fractionation
                                 to achieve diffusion.<br><br>
                                 You can click a letter in the table to see the location data for that letter.<br>
+                            </p>
+                        </div>
+                        <hr>
+                        <button type="button" class="collapsible" style="background-color: var(--b1);">General information</button>
+                        <div class="content">
+                            <p>Named <b class="descriptor">Osm</b> after the Czech word for "eight" - the central component of this cipher is an 8x8 Polybius square.
+                                This cipher was inspired by Felix Delastelle's bifid cipher. 
+                                Like bifid, it was designed to be possible entirely with pen and paper, aside from a few additions such as the hash feature.<br><br>
+                                This cipher is untested and was created for fun. If you require strong encryption, please use a modern cryptographic solution.<br>
+                    
                             </p>
                         </div>
                     </div>
