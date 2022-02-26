@@ -122,6 +122,20 @@ function getInputYX (inputText, finalKey, stringPreTrans) {
 
 //encrypt function
 document.getElementById('encrypt').onclick = function () {
+
+  //make sure a group size is selected. this part should go later, but if it's not inlcuded there is an error 
+  if (document.getElementById('groupSizeM').checked) {
+    if (document.getElementById('multiGroupSize').value == ""){
+      document.getElementById('multiGroupSize').value = "5,7,6"
+
+      document.getElementById('warningMessage').style.display = "inherit"
+      document.getElementById('warningMessageText').innerHTML = " Group sizes not entered. Defaulted to '<b>5,7,6</b>'."
+
+      setTimeout(() => {  
+        document.getElementById('warningMessage').style.display = "none"
+      }, 6000);
+    }
+  }
   //console.log("Encrypt function started...");
 
   //create variable k which is sent to the getKey function and returns the key
@@ -134,6 +148,20 @@ document.getElementById('encrypt').onclick = function () {
   //get inputText
   let inputText = document.getElementById('inputBox').value
   inputText = inputText.replaceAll(' ', '_')
+
+
+  //XOR test   (64-(x-y))%64
+  if(document.getElementById('stream').checked){
+    var streamText = ""
+    for (g=0; g < inputText.length; g++){
+      streamText += finalKey.charAt((64-(finalKey.indexOf(inputText.charAt(g)) - defaultAlphabet.indexOf(finalKey.charAt(g % 64))))%64)
+    }
+    inputText = streamText
+  }
+
+  //x = character in plaintext
+  //y = character in key's location in default alphabet
+  //answer = character in key
 
   //adding filler characters to make cryptography more difficult
   if(document.getElementById('filler').checked){
@@ -155,36 +183,36 @@ document.getElementById('encrypt').onclick = function () {
     //if using multiple group sizes
     } else if (document.getElementById('groupSizeM').checked) {
 
-      //split the filler periods into an array
-      fillerPeriod = document.getElementById('multiGroupSize').value.split(',')
+        //split the filler periods into an array
+        fillerPeriod = document.getElementById('multiGroupSize').value.split(',')
 
-      //get the amount of periods listed
-      let fillerPeriodAmount = fillerPeriod.length
+        //get the amount of periods listed
+        let fillerPeriodAmount = fillerPeriod.length
 
-      //this variable is where we are in the input, starts at 0
-      let cLocation = 0.0;
+        //this variable is where we are in the input, starts at 0
+        let cLocation = 0.0;
 
-      for (c = 0; c < inputLength; c++){
+        for (c = 0; c < inputLength; c++){
 
-        //add random character into each group
-        inputText.splice(parseInt(cLocation, 10) + parseInt(fillerPeriod[c % fillerPeriodAmount], 10) - 1, 0, defaultAlphabet.charAt(Math.floor(Math.random() * 63)))
+          //add random character into each group
+          inputText.splice(parseInt(cLocation, 10) + parseInt(fillerPeriod[c % fillerPeriodAmount], 10) - 1, 0, defaultAlphabet.charAt(Math.floor(Math.random() * 63)))
 
-        //console.log(parseInt(cLocation, 10) + parseInt(fillerPeriod[c % fillerPeriodAmount], 10) - 1)
-        //console.log("Period: " + fillerPeriod[c % fillerPeriodAmount] + ", Length: " + inputLength + ", c = " + c + ", cLocation: " + cLocation + ", fillerPeriodAmount: " + fillerPeriodAmount)
+          //console.log(parseInt(cLocation, 10) + parseInt(fillerPeriod[c % fillerPeriodAmount], 10) - 1)
+          //console.log("Period: " + fillerPeriod[c % fillerPeriodAmount] + ", Length: " + inputLength + ", c = " + c + ", cLocation: " + cLocation + ", fillerPeriodAmount: " + fillerPeriodAmount)
 
-        //set the location to where the next group starts (*1 because it wants to be a string instead of int)
-        cLocation = cLocation + (fillerPeriod[c % fillerPeriodAmount]) * 1
+          //set the location to where the next group starts (*1 because it wants to be a string instead of int)
+          cLocation = cLocation + (fillerPeriod[c % fillerPeriodAmount]) * 1
 
-        //break the loop if we exceed the input (+2 becaue idk)
-        if(cLocation + parseInt(fillerPeriod[(c + 1) % fillerPeriodAmount], 10) > inputLength + c + 2){
-          break;
+          //break the loop if we exceed the input (+2 becaue idk)
+          if(cLocation + parseInt(fillerPeriod[(c + 1) % fillerPeriodAmount], 10) > inputLength + c + 2){
+            break;
+          }
+        
         }
-      
-      }
 
       //console.log('Specific groups: ' + fillerPeriod);
       //console.log('Groups in cycle: ' + fillerPeriod.length);
-
+      
     }
 
     //console.log(inputText.length + " = length")
@@ -371,6 +399,20 @@ document.getElementById('decrypt').onclick = function () {
   //this will be very similar to the encrypt function, but the transposition will differ
   //console.log("Decrypt function started...");
 
+  //make sure a group size is selected. this part should go later, but if it's not inlcuded there is an error 
+  if (document.getElementById('groupSizeM').checked) {
+    if (document.getElementById('multiGroupSize').value == ""){
+      document.getElementById('multiGroupSize').value = "5,7,6"
+
+      document.getElementById('warningMessage').style.display = "inherit"
+      document.getElementById('warningMessageText').innerHTML = " Group sizes not entered. Defaulted to '<b>5,7,6</b>'."
+
+      setTimeout(() => {  
+        document.getElementById('warningMessage').style.display = "none"
+      }, 6000);
+    }
+  }
+
   //create variable k which is sent to the getKey function and returns the key
   let k
   let finalKey = getKey(k)
@@ -508,7 +550,7 @@ document.getElementById('decrypt').onclick = function () {
   }
 
   //write the final encryption to the output box
-  finalDecryption = finalDecryption.replaceAll('_', ' ')
+  
 
   //remove filler 
   if(document.getElementById('filler').checked){
@@ -546,8 +588,18 @@ document.getElementById('decrypt').onclick = function () {
 
       finalDecryption = newStrArray.join('')
     }
-    }
+  }
 
+  //XOR test   (64-(x-y))%64
+  if(document.getElementById('stream').checked){
+    var streamText = ""
+    for (g=0; g < finalDecryption.length; g++){
+      streamText += finalKey.charAt((64-(finalKey.indexOf(finalDecryption.charAt(g)) - defaultAlphabet.indexOf(finalKey.charAt(g % 64))))%64)
+    }
+    finalDecryption = streamText
+  }
+
+  finalDecryption = finalDecryption.replaceAll('_', ' ')
 
   document.getElementById('outputBox').value = finalDecryption
 
@@ -599,7 +651,7 @@ function shuffle (k) {
 }
 
 //live character counter
-document.getElementById('inputBox').onkeyup = function () {
+document.getElementById('inputBox').oninput = function () {
   document.getElementById('charCount').textContent = 'Character count: ' + this.value.length
   document.getElementById('charCount').style.display = 'inherit'
   let inputCheck = document.getElementById('inputBox').value
@@ -607,7 +659,7 @@ document.getElementById('inputBox').onkeyup = function () {
   
   //check text to see is sanitize is required
   if (inputCheck.length > 0 ){
-    if( /[^a-zA-Z0-9\_\s\.]/.test(inputCheck)) {
+    if( /[^a-zA-Z0-9\_\ \.]/.test(inputCheck)) {  //if( /[^a-zA-Z0-9\_\s\.]/.test(inputCheck)) { worked but didn't differentiate types of whitespace
       //change colors to red
       document.getElementById("inputBox").style.background = "linear-gradient(180deg, rgba(255,0,0,0.2) 0%, rgba(255,255,255,0) 100%)";
       document.getElementById("sanitize").style.outline = "2px solid red"
@@ -756,6 +808,20 @@ document.getElementById('genKey').onclick = function () {
 
   //send key to key textbox
   document.getElementById('keyBox').value = newKeyFinal
-  //console.log(newKeyFinal)
 }
 }
+
+
+document.getElementById('warningButton').onclick = function () {
+  document.getElementById('warningMessage').style.display = "none" 
+}
+
+
+
+
+
+
+
+
+
+//  (64-(39-38))%64

@@ -32,10 +32,17 @@
                             <span>Base64</span> 
                         </label>
 
+                        <label class="checkbox" for="stream" style="float: right; margin-top: 0.25em; padding-right: 1em;">
+                            <input type="checkbox" id="stream" name="stream" value="no" />
+                            <span>Stream</span> 
+                        </label>
+
                         <label class="checkbox" for="filler" style="float: right; margin-top: 0.25em; padding-right: 1em;">
                             <input type="checkbox" id="filler" name="filler" value="no" />
                             <span>Filler</span> 
                         </label>
+
+                        
 
                       
                         <br>
@@ -120,6 +127,9 @@
                                 Random characters are added to the plaintext before encryption to make cryptography more difficult. 
                                 One random character is added per group. These characters are removed during decryption.
                                 <br><br>
+                                <b class="descriptor">Stream:</b> 
+                                The keyed alphabet is used as a keystream from which characters are combined with the plaintext (input) before encryption.
+                                <br><br>
                                 <b class="descriptor">Group size:</b> The encryption process occurs in blocks, using chunks
                                 of the input and mixing them together.
                                 Group size determines how many characters will be encrypted together at a time. If multiple 
@@ -159,7 +169,17 @@
                         <div class="button2" id="decrypt">DECRYPT</div>
                         <div class="button1" id="clearText" style="float: right;">CLEAR</div>
                         <div class="button1" id="copyText" style="float: right;">COPY</div>
+
+                        <div class="warningMessage" id="warningMessage" style="display: none;">
+                            <div class="warningButton" id="warningButton">
+                                <p style="font-size: 0.9em; padding: 0.6em; margin: 0em;">
+                                <b>×</b></p></div>
+                            <p style="font-size: 0.9em; padding: 0.6em; margin: 0em;" id="warningMessageText">
+                                Group sizes not entered. Defaulted to "<b>5,7,6</b>".</p> 
+                                
+                        </div>
                     </div>
+                    
                 </div>
                 <div class='column'>
                     <div class="columnTitle"><b>INFORMATION</b></div>

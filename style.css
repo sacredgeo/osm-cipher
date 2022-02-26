@@ -78,6 +78,7 @@ body {
 
 .container {
   width: 90%;
+ 
   margin-left: auto;
   margin-right: auto;
 }
@@ -97,7 +98,7 @@ body {
 }
 
 .content-column {
-  background-color: #f0f0f079;
+  background-color: #f0f0f057;
   border: 2px var(--b6) solid;
   border-radius: 0px 0px 0px 0px;
   color: var(--bl);
@@ -372,6 +373,32 @@ span.hover {
   display: none;
 }
 
+.warningMessage {
+  background-color: rgb(211, 211, 211); 
+  border-radius: 4px; 
+  border: #999 1px solid; 
+  margin-top: 1em; 
+  background: linear-gradient(180deg, rgba(255,0,0,0.2) 0%, rgba(255,255,255,0) 100%); 
+  box-shadow: inset 0px -3px 0px red;
+  pointer-events: none;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none;
+}
+
+.warningButton{
+  float: right; 
+  pointer-events: all;
+  margin: 0em;
+  cursor:pointer;
+}
+
+.warningButton:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+
 .descriptor {
   color: var(--b8);
 }
@@ -511,6 +538,7 @@ hr {
   margin-left: 0.3em;
   width: 100%;
 }
+
 .singleGroupSize select:hover {
   border: 1px solid var(--b6);
   box-shadow: 0px 0px 3px var(--b6);
