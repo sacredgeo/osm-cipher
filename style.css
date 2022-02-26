@@ -98,14 +98,14 @@ body {
 }
 
 .content-column {
-  background-color: #f0f0f057;
+  background-color: rgba(240, 240, 240, 0.6);
   border: 2px var(--b6) solid;
   border-radius: 0px 0px 0px 0px;
   color: var(--bl);
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   padding: 1em;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
 }
 
 .keyBox {
