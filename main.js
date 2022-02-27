@@ -1,1 +1,424 @@
-let defaultAlphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.",cipherTableArray=[];function pageLoad(){resetAlphabet()}function resetAlphabet(){document.getElementById("keyedAlphabet").textContent=defaultAlphabet;for(let e=0;e<defaultAlphabet.length;e++)document.getElementById("t"+e).textContent=defaultAlphabet[e]}function getKey(e){let t=document.getElementById("keyBox").value;if(document.getElementById("useBase64").checked){t=btoa(t).replace(/=/g,"").replace(/\//g,".").replace(/\+/g,"_")}return e=(t.split("").filter(((e,t,n)=>n.indexOf(e)===t)).join("")+defaultAlphabet).split("").filter(((e,t,n)=>n.indexOf(e)===t)).join(""),document.getElementById("keyedAlphabet").textContent=e,e}function getKeyYX(e){for(let t=0;t<e.length;t++){let n=t%8,l=Math.floor(t/8);l="000".substr(l.toString(2).length)+l.toString(2),n="000".substr(n.toString(2).length)+n.toString(2),cipherTableArray[t]=l.concat(n),document.getElementById("t"+t).textContent=e.charAt(t)}}function getInputYX(e,t,n){for(i=0;i<e.length;i++){currentCharPosInKey=t.indexOf(e.charAt(i));let l=Math.floor(currentCharPosInKey/8),o=currentCharPosInKey%8;l="000".substr(l.toString(2).length)+l.toString(2),o="000".substr(o.toString(2).length)+o.toString(2);let d="";for(z=0;z<3;z++)d+=l.charAt(z).concat(o.charAt(z));n+=d}return n}function shuffle(e){var t=e.split("");return t.sort((function(){return.5-Math.random()})),e=t.join("")}document.getElementById("encrypt").onclick=function(){document.getElementById("groupSizeM").checked&&""==document.getElementById("multiGroupSize").value&&(document.getElementById("multiGroupSize").value="5,7,6",document.getElementById("warningMessage").style.display="inherit",document.getElementById("warningMessageText").innerHTML=" Group sizes not entered. Defaulted to '<b>5,7,6</b>'.",setTimeout((()=>{document.getElementById("warningMessage").style.display="none"}),6e3));let e=getKey(undefined);getKeyYX(e);let t=document.getElementById("inputBox").value;if(t=t.replaceAll(" ","_"),document.getElementById("stream").checked){var n="",l=e;for(g=0;g<t.length;g++)n+=l.charAt((64-(e.indexOf(t.charAt(g))-defaultAlphabet.indexOf(e.charAt(g%64))))%64),g>0&&(g+1)%64==0&&(l=l.substring(1)+l.charAt(0));t=n}if(document.getElementById("filler").checked){let e,n=t.length;if(t=t.split(""),document.getElementById("groupSizeS").checked)for(e=document.getElementById("singleGroupSize").value,b=1;b<=n/(e-1);b++)t.splice(b*(e-1)+b-1,0,defaultAlphabet.charAt(Math.floor(63*Math.random())));else if(document.getElementById("groupSizeM").checked){e=document.getElementById("multiGroupSize").value.split(",");let l=e.length,o=0;for(c=0;c<n&&(t.splice(parseInt(o,10)+parseInt(e[c%l],10)-1,0,defaultAlphabet.charAt(Math.floor(63*Math.random()))),o+=1*e[c%l],!(o+parseInt(e[(c+1)%l],10)>n+c+2));c++);}t=t.join("")}let o,d="";d=getInputYX(t,e,d),document.getElementById("groupSizeS").checked?o=document.getElementById("singleGroupSize").value:document.getElementById("groupSizeM").checked&&(o=document.getElementById("multiGroupSize").value.split(","));let u=o.length,a=d,m=0;for(;a.length>0;)a=a.substring(6*o[m%u]),m++;let y=[];if(document.getElementById("groupSizeS").checked){for(i=0;i<d.length/(6*o);i++)if(y[i]=d.substr(i*o*6,6*o),i===m-1&&y[i].length<6*o){let e=y[i].length;for(x=0;x<6*o-e;x++)y[i]+=Math.round(Math.random())}}else if(document.getElementById("groupSizeM").checked){let e=0;for(i=0;i<m;i++)if(y[i]=d.substr(e,6*o[i%o.length]),e+=6*o[i%o.length],i===m-1&&y[i].length<6*o[i%o.length]){let e=y[i].length;for(x=0;x<6*o[i%o.length]-e;x++)y[i]+=Math.round(Math.random())}}let h=[];for(i=0;i<y.length;i++)for(h[i]=[],q=0;q<6;q++)for(p=0;p<y[i].length;p++)p%6===q&&(h[i]+=y[i].charAt(p));let s=h.join(""),B=[];for(i=0;i<s.length/6;i++)B[i]=s.substr(6*i,6);let I="";for(i=0;i<B.length;i++){let t=B[i],n="",l="";for(r=0;r<3;r++)n+=t.toString().charAt(2*r),l+=t.toString().charAt(2*r+1);t=n.concat(l),I+=e.charAt(cipherTableArray.indexOf(t))}let f="";for(i=0;i<I.length;i++)f+=(I.charCodeAt(i).toString(10)^e.charCodeAt(i%e.length).toString(10)).toString(16);document.getElementById("outputBox").value=I,document.getElementById("tableLocation").textContent="",document.getElementById("tableLocation").style.display="none"},document.getElementById("decrypt").onclick=function(){document.getElementById("groupSizeM").checked&&""==document.getElementById("multiGroupSize").value&&(document.getElementById("multiGroupSize").value="5,7,6",document.getElementById("warningMessage").style.display="inherit",document.getElementById("warningMessageText").innerHTML=" Group sizes not entered. Defaulted to '<b>5,7,6</b>'.",setTimeout((()=>{document.getElementById("warningMessage").style.display="none"}),6e3));let e=getKey(undefined);getKeyYX(e);let t=document.getElementById("inputBox").value;t=t.replaceAll(" ","_");let n,l="";l=getInputYX(t,e,l),document.getElementById("groupSizeS").checked?n=document.getElementById("singleGroupSize").value:document.getElementById("groupSizeM").checked&&(n=document.getElementById("multiGroupSize").value.split(","));let o=n.length,d=l,c=0;for(;d.length>0;)d=d.substring(6*n[c%o]),c++;let u=[];if(document.getElementById("groupSizeS").checked)for(i=0;i<l.length/(6*n);i++)u[i]=l.substr(i*n*6,6*n);else if(document.getElementById("groupSizeM").checked){let e=0;for(i=0;i<c;i++)u[i]=l.substr(e,6*n[i%n.length]),e+=6*n[i%n.length]}let a=[];for(i=0;i<u.length;i++)for(a[i]=[],q=0;q<u[i].length/6;q++)for(p=0;p<u[i].length;p++)p%(u[i].length/6)===q&&(a[i]+=u[i].charAt(p));let m=a.join(""),y=[];for(i=0;i<m.length/6;i++)y[i]=m.substr(6*i,6);let h="";for(i=0;i<y.length;i++){let t=y[i],n="",l="";for(r=0;r<3;r++)n+=t.toString().charAt(2*r),l+=t.toString().charAt(2*r+1);t=n.concat(l),h+=e.charAt(cipherTableArray.indexOf(t))}if(document.getElementById("filler").checked){let e,t=0,n=[];if(document.getElementById("groupSizeS").checked){for(e=document.getElementById("singleGroupSize").value;t<h.length;)n.push(h.substring(t,t+parseInt(e,10)-1)),t+=parseInt(e,10);h=n.join("")}else if(document.getElementById("groupSizeM").checked){e=document.getElementById("multiGroupSize").value.split(",");let l=e.length,o=0;for(;t<h.length;)n.push(h.substring(t,t+parseInt(e[o%l],10)-1)),t+=parseInt(e[o%l],10),o++;h=n.join("")}}if(document.getElementById("stream").checked){var s="",B=e;for(g=0;g<h.length;g++)s+=B.charAt((64-(e.indexOf(h.charAt(g))-defaultAlphabet.indexOf(e.charAt(g%64))))%64),g>0&&(g+1)%64==0&&(B=B.substring(1)+B.charAt(0));h=s}h=h.replaceAll("_"," "),document.getElementById("outputBox").value=h,document.getElementById("tableLocation").textContent="",document.getElementById("tableLocation").style.display="none"},document.getElementById("copyText").onclick=function(){var e=document.getElementById("outputBox"),t=document.createElement("textarea");t.value=e.value,document.body.appendChild(t),t.select(),document.execCommand("Copy"),t.remove()},document.getElementById("clearText").onclick=function(){document.getElementById("keyBox").value="",document.getElementById("inputBox").value="",document.getElementById("outputBox").value="",document.getElementById("charCount").textContent="",document.getElementById("tableLocation").textContent="",document.getElementById("tableLocation").style.display="none",document.getElementById("inputBox").style.background="white",document.getElementById("sanitize").style.outline="none",resetAlphabet()},document.getElementById("randomKey").onclick=function(){var e=defaultAlphabet;e=shuffle(e),document.getElementById("keyBox").value=e},document.getElementById("inputBox").oninput=function(){document.getElementById("charCount").textContent="Character count: "+this.value.length,document.getElementById("charCount").style.display="inherit";let e=document.getElementById("inputBox").value;e.length>0&&/[^a-zA-Z0-9\_\ \.]/.test(e)?(document.getElementById("inputBox").style.background="linear-gradient(180deg, rgba(255,0,0,0.2) 0%, rgba(255,255,255,0) 100%)",document.getElementById("sanitize").style.outline="2px solid red"):(document.getElementById("inputBox").style.background="white",document.getElementById("sanitize").style.outline="none")},document.getElementById("sanitize").onclick=function(){var e=document.getElementById("inputBox").value;document.getElementById("inputBox").value=e.replace(/[?!]/g,".").replace(/[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-\/:;<=>@\[\]^`{|}~]/g,"").replace(/\s+/g," "),document.getElementById("inputBox").style.background="white",document.getElementById("sanitize").style.outline="none",document.getElementById("charCount").textContent="Character count: "+document.getElementById("inputBox").value.length},document.getElementById("cipherTableMatrix").onclick=e=>{if(e.target.id){let t=e.target.id;clickedCharIndex=t.replace("t",""),t=document.getElementById("keyedAlphabet").textContent.charAt(clickedCharIndex);let n=Math.floor(clickedCharIndex/8),l=clickedCharIndex%8;n="000".substr(n.toString(2).length)+n.toString(2),l="000".substr(l.toString(2).length)+l.toString(2);let o="";for(z=0;z<3;z++)o+=n.charAt(z).concat(l.charAt(z));document.getElementById("tableLocation").textContent='Location of "'+t+'" = '+o,document.getElementById("tableLocation").style.display="inherit"}},document.getElementById("genKey").onclick=function(){if(""==document.getElementById("keyBox").value)document.getElementById("keyBox").style.background="linear-gradient(180deg, rgba(255,0,0,0.2) 0%, rgba(255,255,255,0) 100%)",document.getElementById("keyBox").style.textAlign="center",document.getElementById("keyBox").style.color="#333333",document.getElementById("keyBox").value="Please enter a key first.",document.getElementById("keyBox").disabled=!0,document.getElementById("keyBox").style.pointerEvents="none",setTimeout((()=>{document.getElementById("keyBox").style.background="white",document.getElementById("keyBox").value="",document.getElementById("keyBox").style.textAlign="left",document.getElementById("keyBox").style.color="black",document.getElementById("keyBox").disabled=!1,document.getElementById("keyBox").style.pointerEvents="auto"}),2500);else{var e,t=document.getElementById("keyBox").value,n=t.length,l="xcFVXHSJRg2BkM5P0i4oYdZpODNGth6ajAq3Ur_uQWvwEIfe9KbCTzm.7nyl1s8L",o="xcFVXHSJRg2BkM5P0i4oYdZpODNGth6ajAq3Ur_uQWvwEIfe9KbCTzm.7nyl1s8L",d="",c=0;for(i=0;i<n;i++)c+=o.indexOf(t.charAt(i))*(i+1);for(c+=331,i=0;i<64;i++)d+=e=l.charAt((o.indexOf(t.charAt(i%n))+(c*(71-i)+i)*n+1)%l.length),l=l.replaceAll(e,"");d=d.split("").reverse().join("");var u="";for(i=0;i<d.length/2;i++)u+=d.charAt(i)+d.charAt(i+d.length/2);document.getElementById("keyBox").value=u}},document.getElementById("warningButton").onclick=function(){document.getElementById("warningMessage").style.display="none"};
+let defaultAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.'
+let cipherTableArray = []
+function pageLoad() {
+  resetAlphabet()
+}
+function resetAlphabet() {
+  document.getElementById('keyedAlphabet').textContent = defaultAlphabet
+  for (let i = 0; i < defaultAlphabet.length; i++) {
+    document.getElementById('t' + i).textContent = defaultAlphabet[i]
+  }
+}
+function getKey(k) {
+  let keyInput = document.getElementById('keyBox').value
+  var useBase = document.getElementById('useBase64')
+  if (useBase.checked) {
+    let keyInputB64 = btoa(keyInput)
+    keyInput = keyInputB64.replace(/=/g, '').replace(/\//g, '.').replace(/\+/g, '_')
+  }
+  let keyInputNoRepeated = keyInput.split('').filter(
+    (value, currentIndex, array) => array.indexOf(value) === currentIndex)
+  let keyInputNoRepeatedJoined = keyInputNoRepeated.join('')
+  let keyWithAlphabet = keyInputNoRepeatedJoined + defaultAlphabet
+  let keyWithAlphabetNoRepeated = keyWithAlphabet.split('').filter(
+    (value, currentIndex, array) => array.indexOf(value) === currentIndex)
+  k = keyWithAlphabetNoRepeated.join('')
+  document.getElementById('keyedAlphabet').textContent = k
+  return k
+}
+function getKeyYX(finalKey) {
+  for (let i = 0; i < finalKey.length; i++) {
+    let charXPos = i % 8
+    let charYPos = Math.floor(i / 8)
+    charYPos = '000'.substr(charYPos.toString(2).length) + charYPos.toString(2)
+    charXPos = '000'.substr(charXPos.toString(2).length) + charXPos.toString(2)
+    cipherTableArray[i] = charYPos.concat(charXPos)
+    document.getElementById('t' + i).textContent = finalKey.charAt(i)
+  }
+}
+function getInputYX(inputText, finalKey, stringPreTrans) {
+  for (i = 0; i < inputText.length; i++) {
+    currentCharPosInKey = finalKey.indexOf(inputText.charAt(i))
+    let charYPosInKey = Math.floor(currentCharPosInKey / 8)
+    let charXPosInKey = currentCharPosInKey % 8
+    charYPosInKey = '000'.substr(charYPosInKey.toString(2).length) + charYPosInKey.toString(2)
+    charXPosInKey = '000'.substr(charXPosInKey.toString(2).length) + charXPosInKey.toString(2)
+    let mergedCharPositions = ''
+    for (z = 0; z < 3; z++) {
+      mergedCharPositions += charYPosInKey.charAt(z).concat(charXPosInKey.charAt(z))
+    }
+    stringPreTrans += mergedCharPositions
+  }
+  return stringPreTrans
+}
+document.getElementById('encrypt').onclick = function () {
+  if (document.getElementById('groupSizeM').checked) {
+    if (document.getElementById('multiGroupSize').value == "") {
+      document.getElementById('multiGroupSize').value = "5,7,6"
+      document.getElementById('warningMessage').style.display = "inherit"
+      document.getElementById('warningMessageText').innerHTML = " Group sizes not entered. Defaulted to '<b>5,7,6</b>'."
+      setTimeout(() => {
+        document.getElementById('warningMessage').style.display = "none"
+      }, 6000);
+    }
+  }
+  let k
+  let finalKey = getKey(k)
+  getKeyYX(finalKey)
+  let inputText = document.getElementById('inputBox').value
+  inputText = inputText.replaceAll(' ', '_')
+  if (document.getElementById('stream').checked) {
+    var streamText = ""
+    var streamKey = finalKey
+    var finalKeyTest = finalKey
+    for (g = 0; g < inputText.length; g++) {
+      streamText += streamKey.charAt((64 - (finalKeyTest.indexOf(inputText.charAt(g)) - defaultAlphabet.indexOf(finalKeyTest.charAt(g % 64)))) % 64)
+      if ((g + 1) % 64 == 0) {
+        finalKeyTest = finalKeyTest.substring(1) + finalKeyTest.charAt(0)
+        finalKeyTest = hashValue(finalKeyTest.substring(0, 6 + ((g + defaultAlphabet.indexOf(finalKeyTest.charAt(0))) % 13)))
+        streamKey = finalKeyTest
+      }
+    }
+    inputText = streamText
+  }
+  if (document.getElementById('filler').checked) {
+    let inputLength = inputText.length
+    inputText = inputText.split('');
+    let fillerPeriod
+    if (document.getElementById('groupSizeS').checked) {
+      fillerPeriod = document.getElementById('singleGroupSize').value
+      for (b = 1; b <= inputLength / (fillerPeriod - 1); b++) {
+        inputText.splice(b * (fillerPeriod - 1) + b - 1, 0, defaultAlphabet.charAt(Math.floor(Math.random() * 63)))
+      }
+    } else if (document.getElementById('groupSizeM').checked) {
+      fillerPeriod = document.getElementById('multiGroupSize').value.split(',')
+      let fillerPeriodAmount = fillerPeriod.length
+      let cLocation = 0.0;
+      for (c = 0; c < inputLength; c++) {
+        inputText.splice(parseInt(cLocation, 10) + parseInt(fillerPeriod[c % fillerPeriodAmount], 10) - 1, 0, defaultAlphabet.charAt(Math.floor(Math.random() * 63)))
+        cLocation = cLocation + (fillerPeriod[c % fillerPeriodAmount]) * 1
+        if (cLocation + parseInt(fillerPeriod[(c + 1) % fillerPeriodAmount], 10) > inputLength + c + 2) {
+          break;
+        }
+      }
+    }
+    inputText = inputText.join('');
+  }
+  let currentCharPosInKey
+  let stringPreTrans = ''
+  stringPreTrans = getInputYX(inputText, finalKey, stringPreTrans)
+  let cipherPeriod
+  if (document.getElementById('groupSizeS').checked) {
+    cipherPeriod = document.getElementById('singleGroupSize').value
+  } else if (document.getElementById('groupSizeM').checked) {
+    cipherPeriod = document.getElementById('multiGroupSize').value.split(',')
+  }
+  let periodCycleAmount = cipherPeriod.length
+  let stringGroupCalc = stringPreTrans
+  let totalGroups = 0
+  while (stringGroupCalc.length > 0) {
+    stringGroupCalc = stringGroupCalc.substring(6 * cipherPeriod[totalGroups % periodCycleAmount])
+    totalGroups++
+  }
+  let stringGroupsArray = []
+  if (document.getElementById('groupSizeS').checked) {
+    for (i = 0; i < stringPreTrans.length / (cipherPeriod * 6); i++) {
+      stringGroupsArray[i] = stringPreTrans.substr(i * cipherPeriod * 6, cipherPeriod * 6)
+      if (i === totalGroups - 1) {
+        if (stringGroupsArray[i].length < cipherPeriod * 6) {
+          let padGroup = stringGroupsArray[i].length
+          for (x = 0; x < ((cipherPeriod * 6) - padGroup); x++) {
+            stringGroupsArray[i] += Math.round(Math.random())
+          }
+        }
+      }
+    }
+  } else if (document.getElementById('groupSizeM').checked) {
+    let startPos = 0
+    for (i = 0; i < totalGroups; i++) {
+      stringGroupsArray[i] = stringPreTrans.substr(startPos, cipherPeriod[i % cipherPeriod.length] * 6)
+      startPos += cipherPeriod[i % cipherPeriod.length] * 6
+      if (i === totalGroups - 1) {
+        if (stringGroupsArray[i].length < (cipherPeriod[i % cipherPeriod.length] * 6)) {
+          let padGroup = stringGroupsArray[i].length
+          for (x = 0; x < ((cipherPeriod[i % cipherPeriod.length] * 6) - padGroup); x++) {
+            stringGroupsArray[i] += Math.round(Math.random())
+          }
+        }
+      }
+    }
+  }
+  let transArray = []
+  for (i = 0; i < stringGroupsArray.length; i++) {
+    transArray[i] = [];
+    for (q = 0; q < 6; q++) {
+      for (p = 0; p < stringGroupsArray[i].length; p++) {
+        if (p % 6 === q) {
+          transArray[i] += stringGroupsArray[i].charAt(p)
+        }
+      }
+    }
+  }
+  let stringPostTrans = transArray.join('')
+  let stringPostTransArray = []
+  for (i = 0; i < stringPostTrans.length / 6; i++) {
+    stringPostTransArray[i] = stringPostTrans.substr(i * 6, 6)
+  }
+  let finalEncryption = ''
+  for (i = 0; i < stringPostTransArray.length; i++) {
+    let charGroup = stringPostTransArray[i]
+    let charGroupY = '',
+      charGroupX = ''
+    for (r = 0; r < 3; r++) {
+      charGroupY += charGroup.toString().charAt(r * 2)
+      charGroupX += charGroup.toString().charAt(r * 2 + 1)
+    }
+    charGroup = charGroupY.concat(charGroupX)
+    finalEncryption += finalKey.charAt(cipherTableArray.indexOf(charGroup))
+  }
+  let outputXor = ''
+  for (i = 0; i < finalEncryption.length; i++) {
+    outputXor += (finalEncryption.charCodeAt(i).toString(10) ^ finalKey.charCodeAt(i % finalKey.length).toString(10)).toString(16);
+  }
+  document.getElementById('outputBox').value = finalEncryption
+  document.getElementById('tableLocation').textContent = ''
+  document.getElementById('tableLocation').style.display = 'none'
+}
+document.getElementById('decrypt').onclick = function () {
+  if (document.getElementById('groupSizeM').checked) {
+    if (document.getElementById('multiGroupSize').value == "") {
+      document.getElementById('multiGroupSize').value = "5,7,6"
+      document.getElementById('warningMessage').style.display = "inherit"
+      document.getElementById('warningMessageText').innerHTML = " Group sizes not entered. Defaulted to '<b>5,7,6</b>'."
+      setTimeout(() => {
+        document.getElementById('warningMessage').style.display = "none"
+      }, 6000);
+    }
+  }
+  let k
+  let finalKey = getKey(k)
+  getKeyYX(finalKey)
+  let inputText = document.getElementById('inputBox').value
+  inputText = inputText.replaceAll(' ', '_')
+  let currentCharPosInKey
+  let stringPreTrans = ''
+  stringPreTrans = getInputYX(inputText, finalKey, stringPreTrans)
+  let cipherPeriod
+  if (document.getElementById('groupSizeS').checked) {
+    cipherPeriod = document.getElementById('singleGroupSize').value
+  } else if (document.getElementById('groupSizeM').checked) {
+    cipherPeriod = document.getElementById('multiGroupSize').value.split(',')
+  }
+  let periodCycleAmount = cipherPeriod.length
+  let stringGroupCalc = stringPreTrans
+  let totalGroups = 0
+  while (stringGroupCalc.length > 0) {
+    stringGroupCalc = stringGroupCalc.substring(6 * cipherPeriod[totalGroups % periodCycleAmount])
+    totalGroups++
+  }
+  let stringGroupsArray = []
+  if (document.getElementById('groupSizeS').checked) {
+    for (i = 0; i < stringPreTrans.length / (cipherPeriod * 6); i++) {
+      stringGroupsArray[i] = stringPreTrans.substr(i * cipherPeriod * 6, cipherPeriod * 6)
+    }
+  } else if (document.getElementById('groupSizeM').checked) {
+    let startPos = 0
+    for (i = 0; i < totalGroups; i++) {
+      stringGroupsArray[i] = stringPreTrans.substr(startPos, cipherPeriod[i % cipherPeriod.length] * 6)
+      startPos += cipherPeriod[i % cipherPeriod.length] * 6
+    }
+  }
+  let transArray = []
+  for (i = 0; i < stringGroupsArray.length; i++) {
+    transArray[i] = []
+    for (q = 0; q < stringGroupsArray[i].length / 6; q++) {
+      for (p = 0; p < stringGroupsArray[i].length; p++) {
+        if (p % (stringGroupsArray[i].length / 6) === q) {
+          transArray[i] += stringGroupsArray[i].charAt(p)
+        }
+      }
+    }
+  }
+  let stringPostTrans = transArray.join('')
+  let stringPostTransArray = []
+  for (i = 0; i < stringPostTrans.length / 6; i++) {
+    stringPostTransArray[i] = stringPostTrans.substr(i * 6, 6)
+  }
+  let finalDecryption = ''
+  for (i = 0; i < stringPostTransArray.length; i++) {
+    let charGroup = stringPostTransArray[i]
+    let charGroupY = '',
+      charGroupX = ''
+    for (r = 0; r < 3; r++) {
+      charGroupY += charGroup.toString().charAt(r * 2)
+      charGroupX += charGroup.toString().charAt(r * 2 + 1)
+    }
+    charGroup = charGroupY.concat(charGroupX)
+    finalDecryption += finalKey.charAt(cipherTableArray.indexOf(charGroup))
+  }
+  if (document.getElementById('filler').checked) {
+    let fillerPeriod
+    let startIndex = 0;
+    let newStrArray = [];
+    if (document.getElementById('groupSizeS').checked) {
+      fillerPeriod = document.getElementById('singleGroupSize').value
+      while (startIndex < finalDecryption.length) {
+        newStrArray.push(finalDecryption.substring(startIndex, startIndex + parseInt(fillerPeriod, 10) - 1));
+        startIndex += parseInt(fillerPeriod, 10);
+      }
+      finalDecryption = newStrArray.join('')
+    } else if (document.getElementById('groupSizeM').checked) {
+      fillerPeriod = document.getElementById('multiGroupSize').value.split(',')
+      let fillerPeriodAmount = fillerPeriod.length
+      let c = 0
+      while (startIndex < finalDecryption.length) {
+        newStrArray.push(finalDecryption.substring(startIndex, startIndex + parseInt(fillerPeriod[c % fillerPeriodAmount], 10) - 1));
+        startIndex += parseInt(fillerPeriod[c % fillerPeriodAmount], 10);
+        c++
+      }
+      finalDecryption = newStrArray.join('')
+    }
+  }
+  if (document.getElementById('stream').checked) {
+    var streamText = ""
+    var streamKey = finalKey
+    var finalKeyTest = finalKey
+    for (g = 0; g < finalDecryption.length; g++) {
+      streamText += streamKey.charAt((64 - (finalKeyTest.indexOf(finalDecryption.charAt(g)) - defaultAlphabet.indexOf(finalKeyTest.charAt(g % 64)))) % 64)
+      if ((g + 1) % 64 == 0) {
+        finalKeyTest = finalKeyTest.substring(1) + finalKeyTest.charAt(0)
+        finalKeyTest = hashValue(finalKeyTest.substring(0, 6 + ((g + defaultAlphabet.indexOf(finalKeyTest.charAt(0))) % 13)))
+        streamKey = finalKeyTest
+      }
+    }
+    finalDecryption = streamText
+  }
+  finalDecryption = finalDecryption.replaceAll('_', ' ')
+  document.getElementById('outputBox').value = finalDecryption
+  document.getElementById('tableLocation').textContent = ''
+  document.getElementById('tableLocation').style.display = 'none'
+}
+document.getElementById('copyText').onclick = function () {
+  var copyTextv = document.getElementById('outputBox')
+  var textArea = document.createElement('textarea')
+  textArea.value = copyTextv.value
+  document.body.appendChild(textArea)
+  textArea.select()
+  document.execCommand('Copy')
+  textArea.remove()
+}
+document.getElementById('clearText').onclick = function () {
+  document.getElementById('keyBox').value = ''
+  document.getElementById('inputBox').value = ''
+  document.getElementById('outputBox').value = ''
+  document.getElementById('charCount').textContent = ''
+  document.getElementById('tableLocation').textContent = ''
+  document.getElementById('tableLocation').style.display = 'none'
+  document.getElementById("inputBox").style.background = "white";
+  document.getElementById("sanitize").style.outline = "none"
+  resetAlphabet()
+}
+document.getElementById('randomKey').onclick = function () {
+  var k = defaultAlphabet
+  k = shuffle(k)
+  document.getElementById('keyBox').value = k
+}
+function shuffle(k) {
+  var arr = k.split('')
+  arr.sort(function () {
+    return 0.5 - Math.random()
+  })
+  k = arr.join('')
+  return k
+}
+document.getElementById('inputBox').oninput = function () {
+  document.getElementById('charCount').textContent = 'Character count: ' + this.value.length
+  document.getElementById('charCount').style.display = 'inherit'
+  let inputCheck = document.getElementById('inputBox').value
+  if (inputCheck.length > 0) {
+    if (/[^a-zA-Z0-9\_\ \.]/.test(inputCheck)) {
+      document.getElementById("inputBox").style.background = "linear-gradient(180deg, rgba(255,0,0,0.2) 0%, rgba(255,255,255,0) 100%)";
+      document.getElementById("sanitize").style.outline = "2px solid red"
+    } else {
+      document.getElementById("inputBox").style.background = "white";
+      document.getElementById("sanitize").style.outline = "none"
+    }
+  } else {
+    document.getElementById("inputBox").style.background = "white";
+    document.getElementById("sanitize").style.outline = "none"
+  }
+}
+document.getElementById('sanitize').onclick = function () {
+  var punctRE = /[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-\/:;<=>@\[\]^`{|}~]/g
+  var spaceRE = /\s+/g
+  var str = document.getElementById('inputBox').value
+  document.getElementById('inputBox').value = str.replace(/[?!]/g, '.').replace(punctRE, '').replace(spaceRE, ' ')
+  document.getElementById("inputBox").style.background = "white";
+  document.getElementById("sanitize").style.outline = "none"
+  document.getElementById('charCount').textContent = 'Character count: ' + document.getElementById('inputBox').value.length
+}
+document.getElementById('cipherTableMatrix').onclick = e => {
+  if (e.target.id) {
+    let clickedChar = e.target.id
+    clickedCharIndex = clickedChar.replace('t', '')
+    clickedChar = document.getElementById('keyedAlphabet').textContent.charAt(clickedCharIndex)
+    let charYPosInKey = Math.floor(clickedCharIndex / 8)
+    let charXPosInKey = clickedCharIndex % 8
+    charYPosInKey = '000'.substr(charYPosInKey.toString(2).length) + charYPosInKey.toString(2)
+    charXPosInKey = '000'.substr(charXPosInKey.toString(2).length) + charXPosInKey.toString(2)
+    let mergedCharPositions = ''
+    for (z = 0; z < 3; z++) {
+      mergedCharPositions += charYPosInKey.charAt(z).concat(charXPosInKey.charAt(z))
+    }
+    document.getElementById('tableLocation').textContent = 'Location of "' + clickedChar + '" = ' + mergedCharPositions
+    document.getElementById('tableLocation').style.display = 'inherit'
+  }
+}
+document.getElementById('genKey').onclick = function () {
+  if (document.getElementById('keyBox').value == "") {
+    document.getElementById("keyBox").style.background = "linear-gradient(180deg, rgba(255,0,0,0.2) 0%, rgba(255,255,255,0) 100%)";
+    document.getElementById("keyBox").style.textAlign = "center"
+    document.getElementById("keyBox").style.color = "#333333"
+    document.getElementById('keyBox').value = "Please enter a key first."
+    document.getElementById('keyBox').disabled = true;
+    document.getElementById('keyBox').style.pointerEvents = "none"
+    setTimeout(() => {
+      document.getElementById("keyBox").style.background = "white"
+      document.getElementById('keyBox').value = ""
+      document.getElementById("keyBox").style.textAlign = "left"
+      document.getElementById("keyBox").style.color = "black"
+      document.getElementById('keyBox').disabled = false;
+      document.getElementById('keyBox').style.pointerEvents = "auto"
+    }, 2500);
+  } else {
+    var keygen = document.getElementById('keyBox').value
+    document.getElementById('keyBox').value = hashValue(keygen)
+  }
+}
+document.getElementById('warningButton').onclick = function () {
+  document.getElementById('warningMessage').style.display = "none"
+}
+function hashValue(keygen) {
+  var kLength = keygen.length
+  var kAlphabet = "xcFVXHSJRg2BkM5P0i4oYdZpODNGth6ajAq3Ur_uQWvwEIfe9KbCTzm.7nyl1s8L"
+  var kDefaultAlphabet = "xcFVXHSJRg2BkM5P0i4oYdZpODNGth6ajAq3Ur_uQWvwEIfe9KbCTzm.7nyl1s8L"
+  var newKey = ""
+  var newChar
+  var kAdded = 0
+  for (i = 0; i < kLength; i++) {
+    kAdded += kDefaultAlphabet.indexOf(keygen.charAt(i)) * (i + 1)
+  }
+  kAdded += 331
+  for (i = 0; i < 64; i++) {
+    newChar = kAlphabet.charAt((kDefaultAlphabet.indexOf(keygen.charAt(i % kLength)) + (kAdded * (71 - i) + i) * kLength + 1) % kAlphabet.length)
+    newKey += newChar
+    kAlphabet = kAlphabet.replaceAll(newChar, '')
+  }
+  newKey = newKey.split("").reverse().join("")
+  var newKeyFinal = ""
+  for (i = 0; i < newKey.length / 2; i++) {
+    newKeyFinal += newKey.charAt(i) + newKey.charAt(i + newKey.length / 2);
+  }
+  keygen = newKeyFinal
+  return keygen
+}
