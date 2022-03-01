@@ -24,7 +24,8 @@
                     </div>
                     <div class='content-column'>
                         <label for="keyBox" class="boxTitle">KEY / SETTINGS</label>
-                        <input type="text" id="keyBox" class="keyBox" style="margin-bottom: 1em;" placeholder="Key...">
+                        <input type="text" id="keyBox" class="keyBox" style="margin-bottom: 1em;" placeholder="Key..."
+                        onkeypress="return /[0-9a-zA-Z_.]/i.test(event.key)">
                         <div class="button1" id="genKey">HASH</div>
                         <div class="button1" id="randomKey">RANDOM</div>
                         <label class="checkbox" for="useBase64" style="float: right; margin-top: 0.25em; display: none;">
@@ -41,10 +42,6 @@
                             <input type="checkbox" id="filler" name="filler" value="no" />
                             <span>Filler</span> 
                         </label>
-
-                        
-
-                      
                         <br>
                         <!--start of settings-->
                         <div class="container" style="width: 100%;">
@@ -79,7 +76,7 @@
                                     </div>
                                     <div id="sMulti" style="display: none;">
                                         <p class="formLabel">Enter group sizes:</p>
-                                        <input type="text" id="multiGroupSize" class="sTextbox">
+                                        <input type="text" id="multiGroupSize" class="sTextbox" onkeypress="return /[0-9,]/i.test(event.key)">
                                         <p class="formLabelSmall">Separated by comma (ex: 8,13,9,6...)</p>
                                     </div>
                                 </div>
@@ -147,9 +144,7 @@
                                     The output appears random and makes cryptanalysis more difficult.
                                     <br>
                                  </section>
-                                
-                                
-                                
+                
                             </p>
                         </div>
                         <hr>
