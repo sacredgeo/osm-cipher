@@ -572,7 +572,6 @@ paddingChecker = function () {
       totalPeriod += +multiPeriod[m];
     }
     if (document.getElementById("filler").checked) {
-      console.log(totalPeriod - multiPeriod.length);
       if (inputText.length % (totalPeriod - multiPeriod.length) == 0) {
         paddingMatch = true;
       } else {
@@ -621,9 +620,7 @@ paddingChecker = function () {
 document.getElementById("filler").onclick = function () {
   if (document.getElementById("inputBox").value.length > 0) {
     paddingChecker();
-  } else {
-    console.log("empty");
-  }
+  } 
 };
 
 document.getElementById("sanitize").onclick = function () {
