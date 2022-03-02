@@ -1,4 +1,3 @@
-//the default alphabet
 const defaultAlphabet =
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.";
 
