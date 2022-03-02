@@ -87,9 +87,11 @@
                                 if (ckType.value === 'S') {
                                     document.getElementById('sSingle').style.display = "inherit";
                                     document.getElementById('sMulti').style.display = "none";
+                                    paddingChecker();
                                 } else if (ckType.value === 'M') {
                                     document.getElementById('sSingle').style.display = "none";
                                     document.getElementById('sMulti').style.display = "inherit";
+                                    paddingChecker();
                                 }
                             }
                         </script>
@@ -135,12 +137,12 @@
                                     This new key appears random and provides more security than a short and simple keyword.<br><br>
 
                                     <b class="descriptor">Filler:</b> 
-                                    Random characters are added to the plaintext before encryption to make cryptanalysis more difficult. 
+                                    Random characters are added to the plaintext (input) before encryption to make cryptanalysis more difficult. 
                                     One random character is added per group. These characters are removed during decryption.
                                     <br><br>
 
                                     <b class="descriptor">Stream:</b> 
-                                    The keyed alphabet is used as a keystream from which characters are combined with the plaintext (input) before encryption.
+                                    The keyed alphabet is used as a keystream from which characters are combined with the plaintext before encryption.
                                     The output appears random and makes cryptanalysis more difficult.
                                     <br>
                                  </section>
@@ -153,8 +155,7 @@
                             placeholder="Enter text to encrypt OR ciphertext to decrypt..."
                             style="height: 150px; resize: vertical; overflow: auto; font-family:'Roboto',sans-serif; "></textarea>
                         <div style="float: right;">
-                            <p id="charCount" class="note"
-                                style="margin: 0px; text-align: right; padding-right: 1em; padding-bottom: 1em; font-size: 0.9em; font-family:'Roboto',sans-serif;">Test</p>
+                            <p id="charCount" class="note">0</p>
                         </div>
                         <div class="button1" id="sanitize">SANITIZE</div>
                         <button type="button" class="collapsible" style="margin-top: 1em;">Input information</button>
@@ -166,6 +167,11 @@
                                 <b class="descriptor">Sanitize:</b> Sanitizing the text remove all other characters,
                                 symbols, and punctuation. Exclamation marks ("!") and
                                 question marks ("?") will be converted to periods. Only sanitize the text when encrypting.
+                                <br><br>
+                                <b class="descriptor">Character count:</b> The number displayed will turn <span style="color: var(--b7)">blue</span> 
+                                when the input length evenly matches the selected group size(s). If the lengths do not match then random characters will be 
+                                padded to the end of the input when encrypting. This is irrelevant when decrypting.
+                                <br>
                             </p>
                         </div>
                         <hr>
