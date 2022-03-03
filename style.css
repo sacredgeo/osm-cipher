@@ -312,10 +312,11 @@ td:hover:not(.tablecell) {
   cursor: pointer;
   position: relative;
   padding: 0.1em;
-  margin-left: 0.1em;
+  margin-left: -0.5em;
+  margin-right: 0em;
   border-radius: 4px;
   border: 1px solid rgba(255,255,255,0);
-  font-size: 1em;
+  font-size: .9em;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -326,7 +327,8 @@ td:hover:not(.tablecell) {
 
 .checkbox > span {
   color: var(--bk);
-  padding-left: 0.5rem;
+  padding-left: 0.4rem;
+  margin-left: 0em;
 }
 .checkbox > input {
   height: 18px;
@@ -360,7 +362,7 @@ span.hover {
   color: var(--b6);
   position: absolute;
   left: 0.3rem;
-  top: 0.1rem;
+  top: 0.2rem;
 }
 .checkbox > input:active {
   border: 1px solid var(--b6);
@@ -606,7 +608,7 @@ hr {
   padding-right: 1em;
   padding-bottom: 1em;
   padding: 0.2em 0.4em;
-  font-size: 1em;
+  font-size: 0.9em;
   font-family: "Roboto", sans-serif;
   background-color: #eee;
   border-radius: 4px;
